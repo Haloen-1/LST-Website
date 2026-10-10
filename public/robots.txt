@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api/editor
+Sitemap: https://little-scientists-taipei.alfredomachula2.chatgpt.site/sitemap.xml
