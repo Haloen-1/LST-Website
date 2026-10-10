@@ -46,3 +46,9 @@ All existing editor collections remain: Impact, mission, program introduction, e
 **Header** (or `/admin?section=header`) manages the brand name/subtitle, logo and alt text, workshop button label, and navigation groups. Add, remove or reorder up to six menu items and ten child links per dropdown. Items without children are direct links. Set the workshop button destination in Links & Contact. Uploaded replacement logos use the existing JPEG preparation; choose Use original vector logo to restore the supplied SVG. Header label translations are editable in 中文內容.
 
 Every public page uses the same sticky header. English/中文 is directly in the header; phone layouts use a compact Menu with the same groups. Timeline action wording is under **Timeline → Lesson details / signup link label**, defaulting to “Lesson details & signup.” Enquiry page copy stays English when the rest of the site switches languages; the embedded Google Form's questions remain separately managed in Google Forms.
+
+## Captions and homepage testimonials
+
+**Photo captions** collects the main, gallery, founder and team photo captions/alt text in one admin section, with formatting previews. The same fields remain editable beside their photos in Photos, Gallery and Team. Empty captions are allowed; enlarged gallery photos remain caption-free.
+
+Add testimonials directly below the photos in **Gallery → Homepage testimonials**, or use the existing **Testimonials** section in the same console. Add the quote, attribution and optional context, then enable its publication checkbox. Use Save draft → Preview saved draft → Publish changes. All visible testimonials appear in the homepage carousel with left/right arrows, touch scrolling and keyboard arrows, without requiring another page. The separate testimonials URL remains available for existing links. Hidden testimonials stay private; no sample testimonials are published by default.

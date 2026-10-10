@@ -2,6 +2,9 @@ import assert from 'node:assert/strict';import fs from 'node:fs';import {parseHT
 const {mf,db,request,headers,post}=await harness();
 try{
  const {content}=recoverSnapshot('published-snapshot');
+ content.testimonials=[1,2,3].map(i=>({id:'test-review-'+i,quote:'Local test review '+i,name:'Test attribution '+i,context:'Test only',visible:true}));
+ content.testimonials.push({id:'private-review',quote:'Unapproved private feedback',name:'Private name',context:'',visible:false});
+ content.gallery[0].caption='An **editable** photo caption';
  const result=await post('/api/editor/save',{content,revision:0});assert.equal(result.status,200);const revision=(await result.json()).revision;
  assert.equal((await db.prepare('SELECT published_content FROM site_content WHERE id=?').bind('site').first()).published_content,null);
  const preview=parseHTML(await(await request('/?preview=draft',{headers})).text()).document;
@@ -11,6 +14,10 @@ try{
   const res=await request(route);assert.equal(res.status,200,route);const d=parseHTML(await res.text()).document;const pack=JSON.parse(d.querySelector('#lst-page-pack').textContent);assert.ok(pack.en.includes('lang="en"'));assert.ok(pack.zh.includes('lang="zh-Hant"'));assert.ok(d.querySelector('main'),route);
  }
  const home=parseHTML(await(await request('/')).text()).document;assert.equal(home.querySelector('.hero-actions [data-link="missionPage"]').getAttribute('href'),content.links.missionPage);assert.equal(home.querySelector('[data-new-tab]').getAttribute('target'),'_blank');assert.equal(home.querySelector('.dialog-caption'),null);assert.equal(home.querySelectorAll('[data-gallery] .gallery-item').length,3);
+ assert.equal(home.querySelectorAll('[data-testimonial-carousel] .testimonial').length,3);
+ assert.ok(!home.querySelector('[data-testimonial-carousel]').textContent.includes('Unapproved private feedback'));
+ assert.equal(home.querySelector('[data-gallery] figcaption strong').textContent,'editable');
+ assert.equal(home.querySelector('#testimonials a[href="/testimonials"]'),null);
  assert.equal(parseHTML(await(await request('/team')).text()).document.querySelector('[data-metrics]'),null);
  const signup=parseHTML(await(await request('/signup')).text()).document;assert.ok(signup.querySelector('iframe').getAttribute('src').startsWith('https://docs.google.com/forms/'));
  const chineseSignup=parseHTML(await(await request('/signup?lang=zh')).text()).document;
