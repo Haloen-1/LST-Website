@@ -1,0 +1,890 @@
+[
+  {
+    "key": "heroEyebrow",
+    "label": "Opening label",
+    "group": "Homepage",
+    "kind": "text",
+    "max": 600,
+    "required": false
+  },
+  {
+    "key": "heroTitle",
+    "label": "Main headline",
+    "group": "Homepage",
+    "kind": "heading",
+    "max": 220,
+    "required": true
+  },
+  {
+    "key": "heroDescription",
+    "label": "Introduction",
+    "group": "Homepage",
+    "kind": "long",
+    "max": 4000,
+    "required": false
+  },
+  {
+    "key": "heroButton",
+    "label": "Main button label",
+    "group": "Homepage",
+    "kind": "text",
+    "max": 600,
+    "required": true
+  },
+  {
+    "key": "heroLocation",
+    "label": "Photo location",
+    "group": "Homepage",
+    "kind": "text",
+    "max": 600,
+    "required": false
+  },
+  {
+    "key": "storyLabel",
+    "label": "Section label",
+    "group": "Our Story",
+    "kind": "text",
+    "max": 600,
+    "required": false
+  },
+  {
+    "key": "storyTitle",
+    "label": "Headline",
+    "group": "Our Story",
+    "kind": "heading",
+    "max": 220,
+    "required": true
+  },
+  {
+    "key": "storyParagraph1",
+    "label": "First paragraph",
+    "group": "Our Story",
+    "kind": "long",
+    "max": 4000,
+    "required": false
+  },
+  {
+    "key": "storyParagraph2",
+    "label": "Second paragraph",
+    "group": "Our Story",
+    "kind": "long",
+    "max": 4000,
+    "required": false
+  },
+  {
+    "key": "storyButton",
+    "label": "Contact button label",
+    "group": "Our Story",
+    "kind": "text",
+    "max": 600,
+    "required": true
+  },
+  {
+    "key": "faqLabel",
+    "label": "Section label",
+    "group": "FAQs",
+    "kind": "text",
+    "max": 600,
+    "required": false
+  },
+  {
+    "key": "faqTitle",
+    "label": "Headline",
+    "group": "FAQs",
+    "kind": "heading",
+    "max": 220,
+    "required": true
+  },
+  {
+    "key": "faqContact",
+    "label": "Contact button label",
+    "group": "FAQs",
+    "kind": "text",
+    "max": 600,
+    "required": true
+  },
+  {
+    "key": "joinLabel",
+    "label": "Section label",
+    "group": "Archived workshop copy",
+    "kind": "text",
+    "max": 600,
+    "required": false
+  },
+  {
+    "key": "joinTitle",
+    "label": "Headline",
+    "group": "Archived workshop copy",
+    "kind": "heading",
+    "max": 220,
+    "required": true
+  },
+  {
+    "key": "joinIntro",
+    "label": "Introduction",
+    "group": "Archived workshop copy",
+    "kind": "long",
+    "max": 4000,
+    "required": false
+  },
+  {
+    "key": "joinButton",
+    "label": "Workshop button label",
+    "group": "Footer",
+    "kind": "text",
+    "max": 600,
+    "required": true
+  },
+  {
+    "key": "joinContact",
+    "label": "Contact button label",
+    "group": "Archived workshop copy",
+    "kind": "text",
+    "max": 600,
+    "required": true
+  },
+  {
+    "key": "joinNote",
+    "label": "Registration note",
+    "group": "Archived workshop copy",
+    "kind": "text",
+    "max": 600,
+    "required": false
+  },
+  {
+    "key": "footerTagline",
+    "label": "Footer tagline",
+    "group": "Footer",
+    "kind": "text",
+    "max": 600,
+    "required": false
+  },
+  {
+    "key": "intro1",
+    "label": "Quick fact 1",
+    "group": "Homepage",
+    "kind": "text",
+    "max": 600,
+    "required": false
+  },
+  {
+    "key": "intro2",
+    "label": "Quick fact 2",
+    "group": "Homepage",
+    "kind": "text",
+    "max": 600,
+    "required": false
+  },
+  {
+    "key": "intro3",
+    "label": "Quick fact 3",
+    "group": "Homepage",
+    "kind": "text",
+    "max": 600,
+    "required": false
+  },
+  {
+    "key": "navPrograms",
+    "label": "Our Programs navigation",
+    "group": "Links & Contact",
+    "kind": "link",
+    "max": 2000,
+    "required": false
+  },
+  {
+    "key": "navStory",
+    "label": "Our Story navigation",
+    "group": "Links & Contact",
+    "kind": "link",
+    "max": 2000,
+    "required": false
+  },
+  {
+    "key": "navFaq",
+    "label": "FAQ navigation",
+    "group": "Links & Contact",
+    "kind": "link",
+    "max": 2000,
+    "required": false
+  },
+  {
+    "key": "heroAction",
+    "label": "Main homepage button",
+    "group": "Links & Contact",
+    "kind": "link",
+    "max": 2000,
+    "required": false
+  },
+  {
+    "key": "workshops",
+    "label": "Workshop page",
+    "group": "Links & Contact",
+    "kind": "link",
+    "max": 2000,
+    "required": false
+  },
+  {
+    "key": "facebook",
+    "label": "Facebook page",
+    "group": "Links & Contact",
+    "kind": "link",
+    "max": 2000,
+    "required": false
+  },
+  {
+    "key": "event",
+    "label": "Featured community event",
+    "group": "Links & Contact",
+    "kind": "link",
+    "max": 2000,
+    "required": false
+  },
+  {
+    "key": "workshopLabel",
+    "label": "Opening label",
+    "group": "Archived workshop copy",
+    "kind": "text",
+    "max": 600,
+    "required": false
+  },
+  {
+    "key": "workshopTitle",
+    "label": "Headline",
+    "group": "Archived workshop copy",
+    "kind": "heading",
+    "max": 220,
+    "required": true
+  },
+  {
+    "key": "workshopIntro",
+    "label": "Introduction",
+    "group": "Archived workshop copy",
+    "kind": "long",
+    "max": 4000,
+    "required": false
+  },
+  {
+    "key": "registrationTitle",
+    "label": "Registration heading",
+    "group": "Archived workshop copy",
+    "kind": "text",
+    "max": 600,
+    "required": true
+  },
+  {
+    "key": "registrationDescription",
+    "label": "Registration instructions",
+    "group": "Archived workshop copy",
+    "kind": "long",
+    "max": 4000,
+    "required": false
+  },
+  {
+    "key": "registrationButton",
+    "label": "Registration button label",
+    "group": "Archived workshop copy",
+    "kind": "text",
+    "max": 600,
+    "required": true
+  },
+  {
+    "key": "registrationNote",
+    "label": "Registration note",
+    "group": "Archived workshop copy",
+    "kind": "text",
+    "max": 600,
+    "required": false
+  },
+  {
+    "key": "workshopContact",
+    "label": "Contact button label",
+    "group": "Archived workshop copy",
+    "kind": "text",
+    "max": 600,
+    "required": true
+  },
+  {
+    "key": "homeSeoTitle",
+    "label": "Browser/search title",
+    "group": "Homepage",
+    "kind": "text",
+    "max": 600,
+    "required": true
+  },
+  {
+    "key": "homeSeoDescription",
+    "label": "Search description",
+    "group": "Homepage",
+    "kind": "text",
+    "max": 400,
+    "required": false
+  },
+  {
+    "key": "workshopSeoTitle",
+    "label": "Browser/search title",
+    "group": "Archived workshop copy",
+    "kind": "text",
+    "max": 600,
+    "required": true
+  },
+  {
+    "key": "workshopSeoDescription",
+    "label": "Search description",
+    "group": "Archived workshop copy",
+    "kind": "text",
+    "max": 400,
+    "required": false
+  },
+  {
+    "key": "navProgramsLabel",
+    "label": "Programs navigation label",
+    "group": "Homepage",
+    "kind": "text",
+    "max": 50,
+    "required": true
+  },
+  {
+    "key": "navStoryLabel",
+    "label": "Story navigation label",
+    "group": "Homepage",
+    "kind": "text",
+    "max": 50,
+    "required": true
+  },
+  {
+    "key": "navFaqLabel",
+    "label": "FAQ navigation label",
+    "group": "Homepage",
+    "kind": "text",
+    "max": 50,
+    "required": true
+  },
+  {
+    "key": "campDateLabel",
+    "label": "Event date label",
+    "group": "Past Event Page",
+    "kind": "text",
+    "max": 600,
+    "required": false
+  },
+  {
+    "key": "campHeadline",
+    "label": "Headline",
+    "group": "Past Event Page",
+    "kind": "heading",
+    "max": 600,
+    "required": true
+  },
+  {
+    "key": "campIntro",
+    "label": "Event name",
+    "group": "Past Event Page",
+    "kind": "long",
+    "max": 4000,
+    "required": false
+  },
+  {
+    "key": "campStoryHeading",
+    "label": "First heading",
+    "group": "Past Event Page",
+    "kind": "heading",
+    "max": 600,
+    "required": true
+  },
+  {
+    "key": "campBody1",
+    "label": "First paragraph",
+    "group": "Past Event Page",
+    "kind": "long",
+    "max": 4000,
+    "required": false
+  },
+  {
+    "key": "campBody2",
+    "label": "Second paragraph",
+    "group": "Past Event Page",
+    "kind": "long",
+    "max": 4000,
+    "required": false
+  },
+  {
+    "key": "campNextHeading",
+    "label": "Next steps heading",
+    "group": "Past Event Page",
+    "kind": "text",
+    "max": 600,
+    "required": true
+  },
+  {
+    "key": "campNextBody",
+    "label": "Next steps",
+    "group": "Past Event Page",
+    "kind": "long",
+    "max": 4000,
+    "required": false
+  },
+  {
+    "key": "campDetailDate",
+    "label": "Event date",
+    "group": "Past Event Page",
+    "kind": "text",
+    "max": 600,
+    "required": true
+  },
+  {
+    "key": "campStatus",
+    "label": "Registration status",
+    "group": "Past Event Page",
+    "kind": "text",
+    "max": 600,
+    "required": false
+  },
+  {
+    "key": "listings",
+    "label": "Event listings page",
+    "kind": "link",
+    "group": "Links & Contact",
+    "max": 2000,
+    "required": true
+  },
+  {
+    "key": "instagram",
+    "label": "Instagram profile",
+    "kind": "link",
+    "group": "Links & Contact",
+    "max": 2000,
+    "required": true
+  },
+  {
+    "key": "eventsTitle",
+    "label": "Event listings heading",
+    "kind": "text",
+    "group": "Events",
+    "max": 160,
+    "required": true
+  },
+  {
+    "key": "eventsIntro",
+    "label": "Event listings introduction",
+    "kind": "long",
+    "group": "Events",
+    "max": 2000,
+    "required": true
+  },
+  {
+    "key": "galleryTitle",
+    "label": "Gallery heading",
+    "kind": "text",
+    "group": "Gallery",
+    "max": 160,
+    "required": true
+  },
+  {
+    "key": "galleryIntro",
+    "label": "Gallery introduction",
+    "kind": "long",
+    "group": "Gallery",
+    "max": 2000,
+    "required": true
+  },
+  {
+    "key": "instagramLabel",
+    "label": "Instagram link label",
+    "kind": "text",
+    "group": "Gallery",
+    "max": 120,
+    "required": true
+  },
+  {
+    "key": "team",
+    "label": "Team page",
+    "kind": "link",
+    "group": "Links & Contact",
+    "max": 2000,
+    "required": true
+  },
+  {
+    "key": "timeline",
+    "label": "Timeline page",
+    "kind": "link",
+    "group": "Links & Contact",
+    "max": 2000,
+    "required": true
+  },
+  {
+    "key": "teamTitle",
+    "label": "Team page heading",
+    "kind": "heading",
+    "group": "Team",
+    "max": 4000,
+    "required": true
+  },
+  {
+    "key": "teamIntro",
+    "label": "Team introduction",
+    "kind": "long",
+    "group": "Team",
+    "max": 4000,
+    "required": true
+  },
+  {
+    "key": "timelineTitle",
+    "label": "Timeline heading",
+    "kind": "heading",
+    "group": "Timeline",
+    "max": 4000,
+    "required": true
+  },
+  {
+    "key": "timelineIntro",
+    "label": "Timeline introduction",
+    "kind": "long",
+    "group": "Timeline",
+    "max": 4000,
+    "required": true
+  },
+  {
+    "key": "impactTitle",
+    "label": "Statistics heading",
+    "kind": "text",
+    "group": "Impact",
+    "max": 4000,
+    "required": true
+  },
+  {
+    "key": "formTitle",
+    "label": "Form page heading",
+    "kind": "heading",
+    "group": "Google Form",
+    "max": 4000,
+    "required": true
+  },
+  {
+    "key": "formIntro",
+    "label": "Form page introduction (English / 中文)",
+    "kind": "long",
+    "group": "Google Form",
+    "max": 4000,
+    "required": true
+  },
+  {
+    "key": "formButton",
+    "label": "Open form button label",
+    "kind": "text",
+    "group": "Google Form",
+    "max": 4000,
+    "required": true
+  },
+  {
+    "key": "googleForm",
+    "label": "Published Google Form responder link",
+    "kind": "link",
+    "group": "Google Form",
+    "max": 2000,
+    "required": true
+  },
+  {
+    "key": "missionLabel",
+    "label": "Mission section label",
+    "kind": "text",
+    "group": "Our Mission",
+    "max": 4000,
+    "required": true
+  },
+  {
+    "key": "missionTitle",
+    "label": "Mission heading",
+    "kind": "heading",
+    "group": "Our Mission",
+    "max": 4000,
+    "required": true
+  },
+  {
+    "key": "missionBody",
+    "label": "Mission statement",
+    "kind": "long",
+    "group": "Our Mission",
+    "max": 4000,
+    "required": true
+  },
+  {
+    "key": "officersTitle",
+    "label": "Officer introduction heading",
+    "kind": "heading",
+    "group": "Team",
+    "max": 4000,
+    "required": true
+  },
+  {
+    "key": "mission",
+    "label": "Our Story / mission destination",
+    "kind": "link",
+    "group": "Links & Contact",
+    "max": 2000,
+    "required": true
+  },
+  {
+    "key": "officers",
+    "label": "Say hello / officer introduction destination",
+    "kind": "link",
+    "group": "Links & Contact",
+    "max": 2000,
+    "required": true
+  },
+  {
+    "key": "nextWorkshopLabel",
+    "label": "Next workshop heading",
+    "kind": "text",
+    "group": "Next workshop",
+    "max": 200,
+    "required": true
+  },
+  {
+    "key": "nextWorkshopNote",
+    "label": "Optional announcement / description",
+    "kind": "long",
+    "group": "Next workshop",
+    "max": 4000,
+    "required": false
+  },
+  {
+    "key": "lessonTitle",
+    "label": "Lesson introduction heading",
+    "kind": "heading",
+    "group": "Our Programs",
+    "max": 500,
+    "required": true
+  },
+  {
+    "key": "lessonIntro",
+    "label": "Lesson introduction",
+    "kind": "long",
+    "group": "Our Programs",
+    "max": 6000,
+    "required": false
+  },
+  {
+    "key": "programTimelineTitle",
+    "label": "Homepage program heading",
+    "kind": "heading",
+    "group": "Our Programs",
+    "max": 500,
+    "required": true
+  },
+  {
+    "key": "programTimelineIntro",
+    "label": "Timeline introduction",
+    "kind": "long",
+    "group": "Our Programs",
+    "max": 6000,
+    "required": false
+  },
+  {
+    "key": "impactIntro",
+    "label": "Impact page introduction",
+    "kind": "long",
+    "group": "Impact",
+    "max": 6000,
+    "required": false
+  },
+  {
+    "key": "impactLocationsTitle",
+    "label": "Locations heading",
+    "kind": "text",
+    "group": "Impact",
+    "max": 500,
+    "required": false
+  },
+  {
+    "key": "impactLocations",
+    "label": "Locations served (one per line)",
+    "kind": "long",
+    "group": "Impact",
+    "max": 6000,
+    "required": false
+  },
+  {
+    "key": "futureTitle",
+    "label": "Future plans heading",
+    "kind": "text",
+    "group": "Impact",
+    "max": 500,
+    "required": false
+  },
+  {
+    "key": "futureBody",
+    "label": "Future plans (leave blank until confirmed)",
+    "kind": "long",
+    "group": "Impact",
+    "max": 6000,
+    "required": false
+  },
+  {
+    "key": "testimonialsTitle",
+    "label": "Testimonials heading",
+    "kind": "heading",
+    "group": "Testimonials",
+    "max": 500,
+    "required": true
+  },
+  {
+    "key": "testimonialsIntro",
+    "label": "Testimonials introduction",
+    "kind": "long",
+    "group": "Testimonials",
+    "max": 6000,
+    "required": false
+  },
+  {
+    "key": "testimonialsEmpty",
+    "label": "Message before reviews are added",
+    "kind": "long",
+    "group": "Testimonials",
+    "max": 6000,
+    "required": false
+  },
+  {
+    "key": "testimonialsLink",
+    "label": "Read testimonials link label",
+    "kind": "text",
+    "group": "Testimonials",
+    "max": 500,
+    "required": false
+  },
+  {
+    "key": "donationTitle",
+    "label": "Company support heading",
+    "kind": "heading",
+    "group": "Company support",
+    "max": 500,
+    "required": true
+  },
+  {
+    "key": "donationIntro",
+    "label": "Company support introduction",
+    "kind": "long",
+    "group": "Company support",
+    "max": 6000,
+    "required": false
+  },
+  {
+    "key": "donationBody",
+    "label": "Ways companies can help",
+    "kind": "long",
+    "group": "Company support",
+    "max": 6000,
+    "required": false
+  },
+  {
+    "key": "donationButton",
+    "label": "Company enquiry button",
+    "kind": "text",
+    "group": "Company support",
+    "max": 500,
+    "required": false
+  },
+  {
+    "key": "donationNote",
+    "label": "Enquiry guidance",
+    "kind": "long",
+    "group": "Company support",
+    "max": 6000,
+    "required": false
+  },
+  {
+    "key": "footerInstagram",
+    "label": "Instagram footer label",
+    "kind": "text",
+    "group": "Footer",
+    "max": 500,
+    "required": false
+  },
+  {
+    "key": "footerSupport",
+    "label": "Company support footer label",
+    "kind": "text",
+    "group": "Footer",
+    "max": 500,
+    "required": false
+  },
+  {
+    "key": "footerFacebook",
+    "label": "Facebook footer label",
+    "kind": "text",
+    "group": "Footer",
+    "max": 500,
+    "required": false
+  },
+  {
+    "key": "programEnquiry",
+    "label": "Enquiry link label",
+    "kind": "text",
+    "group": "Our Programs",
+    "max": 500,
+    "required": false
+  },
+  {
+    "key": "programAsk",
+    "label": "Email enquiry label",
+    "kind": "text",
+    "group": "Our Programs",
+    "max": 500,
+    "required": false
+  },
+  {
+    "key": "impact",
+    "label": "Impact destination",
+    "kind": "link",
+    "group": "Links & Contact",
+    "max": 2000,
+    "required": true
+  },
+  {
+    "key": "testimonials",
+    "label": "Testimonials destination",
+    "kind": "link",
+    "group": "Links & Contact",
+    "max": 2000,
+    "required": true
+  },
+  {
+    "key": "donations",
+    "label": "Company support destination",
+    "kind": "link",
+    "group": "Links & Contact",
+    "max": 2000,
+    "required": true
+  },
+  {
+    "key": "enquiries",
+    "label": "Workshop enquiry destination",
+    "kind": "link",
+    "group": "Links & Contact",
+    "max": 2000,
+    "required": true
+  },
+  {
+    "key": "planningLabel",
+    "label": "Timeline planning label",
+    "group": "Our Programs",
+    "kind": "text",
+    "max": 1000,
+    "required": false
+  },
+  {
+    "key": "planningNote",
+    "label": "Timeline planning note",
+    "group": "Our Programs",
+    "kind": "text",
+    "max": 1000,
+    "required": false
+  },
+  {
+    "key": "missionPage",
+    "label": "Mission page destination",
+    "kind": "link",
+    "group": "Links & Contact",
+    "max": 2000,
+    "required": true
+  }
+]

@@ -1,0 +1,276 @@
+{
+  "text": {
+    "heroEyebrow": "LITTLE SCIENTISTS TAIPEI",
+    "heroTitle": "Science workshops\nin Taipei.",
+    "heroDescription": "Hands-on science workshops in English for elementary school children, led by student mentors.",
+    "heroButton": "View our programs",
+    "heroLocation": "TAIPEI, TAIWAN",
+    "storyLabel": "ABOUT US",
+    "storyTitle": "Our story",
+    "storyParagraph1": "Little Scientists Taipei began with Evelyn Lee and Alice Kuok, two Taipei American School students with a shared love of science and education.",
+    "storyParagraph2": "Our purpose is simple: help elementary school children explore scientific ideas, practise English, and enjoy figuring things out together.",
+    "storyButton": "Say hello to our team",
+    "faqLabel": "FREQUENTLY ASKED QUESTIONS",
+    "faqTitle": "Questions & answers",
+    "faqContact": "We’d love to help",
+    "joinLabel": "TAKE PART",
+    "joinTitle": "Join a workshop",
+    "joinIntro": "See upcoming workshops, locations, and signup details.",
+    "joinButton": "View workshops",
+    "joinContact": "Ask about the next workshop",
+    "joinNote": "Find the details and register on our workshop page.",
+    "footerTagline": "Science workshops in English.",
+    "intro1": "For elementary school explorers",
+    "intro2": "Hands-on science, in English",
+    "intro3": "Led by passionate student mentors",
+    "workshopLabel": "OUR PROGRAMS",
+    "workshopTitle": "Workshops & camps",
+    "workshopIntro": "Find workshop dates, locations, and signup details in our program listings.",
+    "registrationTitle": "Program listings",
+    "registrationDescription": "Browse past and upcoming programs. Open a listing to see its description, location, and signup form.",
+    "registrationButton": "View current registration",
+    "registrationNote": "Find dates, locations, and registration details in our event listings.",
+    "workshopContact": "Ask us about a workshop ↗",
+    "homeSeoTitle": "Little Scientists Taipei | Science Workshops in English",
+    "homeSeoDescription": "Hands-on science, English learning, and a world of curiosity. Discover Little Scientists Taipei workshops for elementary school students and school partnerships.",
+    "workshopSeoTitle": "Find Your Next Workshop | Little Scientists Taipei",
+    "workshopSeoDescription": "Find your next Little Scientists Taipei workshop and continue to the current registration form.",
+    "navProgramsLabel": "Our Programs",
+    "navStoryLabel": "Our Story",
+    "navFaqLabel": "FAQs",
+    "campDateLabel": "PAST EVENT · 4 JULY 2026",
+    "campHeadline": "One-day English\nScience Camp",
+    "campIntro": "One-day English Science Camp\n一日英文科學營",
+    "campStoryHeading": "Workshop program",
+    "campBody1": "The 4 July 2026 camp programme combined an English science workshop, lunch, and a visit to the National Taiwan Science Education Center.",
+    "campBody2": "The event listing offered a free day of exploration with ten places available. Those details applied to this event only; future workshops may have different formats, locations, and fees.",
+    "campNextHeading": "Other programs",
+    "campNextBody": "This is a past event, and registration is closed. Visit our current event listings or email the team to ask about the next opportunity to take part.",
+    "campDetailDate": "4 July 2026",
+    "campStatus": "Registration closed",
+    "eventsTitle": "Our programs",
+    "eventsIntro": "Browse workshops and lessons. Filter by past or upcoming events.",
+    "galleryTitle": "Workshop photos",
+    "galleryIntro": "Photos from Little Scientists Taipei workshops.",
+    "instagramLabel": "Follow our discovery on Instagram",
+    "teamTitle": "Our team",
+    "teamIntro": "Meet the students behind Little Scientists Taipei.",
+    "timelineTitle": "Workshop timeline",
+    "timelineIntro": "Explore our workshops and lessons.",
+    "impactTitle": "Our impact",
+    "formTitle": "Workshop enquiries & updates / 活動洽詢與最新消息",
+    "formIntro": "Leave your name and email below. A parent or guardian should complete the form for a child. This is an enquiry, not a confirmed booking.\n請留下姓名與電子郵件。兒童請由家長或監護人填寫。此表單供活動洽詢使用，不代表報名已確認。",
+    "formButton": "Open Google Form / 開啟 Google 表單",
+    "missionLabel": "ABOUT US",
+    "missionTitle": "Our mission",
+    "missionBody": "Help elementary school children explore scientific ideas, practise English, and enjoy figuring things out together.",
+    "officersTitle": "Meet our officers",
+    "nextWorkshopLabel": "Next workshop",
+    "nextWorkshopNote": "",
+    "lessonTitle": "Our lessons",
+    "lessonIntro": "Children explore physics, chemistry, and biology through experiments and hands-on activities. Each workshop has its own theme.",
+    "programTimelineTitle": "Our Programs",
+    "programTimelineIntro": "Explore our workshops and lessons. Select an event for details and registration.",
+    "impactIntro": "Explore the workshops, people, and places that are part of Little Scientists Taipei.",
+    "impactLocationsTitle": "Locations served",
+    "impactLocations": "",
+    "futureTitle": "Looking ahead",
+    "futureBody": "And more! We look forward to reaching more schools and locations.",
+    "testimonialsTitle": "Testimonials",
+    "testimonialsIntro": "Experiences shared by our workshop community.",
+    "testimonialsEmpty": "Have you joined a workshop? We would love to hear about your experience.",
+    "testimonialsLink": "Read testimonials",
+    "donationTitle": "Support our workshops",
+    "donationIntro": "Help bring hands-on science to more children. We welcome conversations with companies interested in supporting Little Scientists Taipei.",
+    "donationBody": "Talk with us about workshop sponsorship, science materials, or space for an activity. Share what your company has in mind and we can discuss the next steps.",
+    "donationButton": "Discuss company support",
+    "donationNote": "Please include your company name, contact person, and the type of support you are considering.",
+    "footerInstagram": "Follow us on Instagram",
+    "footerSupport": "Company support",
+    "footerFacebook": "Facebook",
+    "programEnquiry": "Enquiries",
+    "programAsk": "Ask about the next workshop",
+    "planningLabel": "THE NEXT MONTH · IN PLANNING",
+    "planningNote": "More lessons are being planned. Dates and details may change; check each listing before registering."
+  },
+  "links": {
+    "navPrograms": "/events",
+    "navStory": "#story",
+    "navFaq": "#questions",
+    "heroAction": "/events",
+    "workshops": "/events",
+    "facebook": "https://www.facebook.com/profile.php?id=61587177894554",
+    "event": "/science-camp.html",
+    "listings": "/events",
+    "instagram": "https://www.instagram.com/littlescientiststaipei/",
+    "team": "/team",
+    "timeline": "/timeline",
+    "googleForm": "https://docs.google.com/forms/d/e/1FAIpQLSeqUEjJDspoT6mGDxPvUJHxaCHEu3xXhpUlNTJqGcpmvKIxcQ/viewform",
+    "mission": "/team#mission",
+    "officers": "/team#officers",
+    "impact": "/impact",
+    "testimonials": "/testimonials",
+    "donations": "/donate",
+    "enquiries": "/signup",
+    "missionPage": "/mission"
+  },
+  "photos": {
+    "hero": {
+      "src": "/assets/experiment.jpg",
+      "alt": "Children and a mentor exploring science together",
+      "x": 62,
+      "y": 50,
+      "caption": "Science workshop in Taipei."
+    },
+    "discovery": {
+      "src": "/assets/discovery.jpg",
+      "alt": "Young explorers working together with science mentors",
+      "x": 50,
+      "y": 50,
+      "caption": "Students working together."
+    },
+    "community": {
+      "src": "/assets/community.jpg",
+      "alt": "A Little Scientists Taipei workshop",
+      "x": 50,
+      "y": 50,
+      "caption": "A Little Scientists Taipei workshop."
+    }
+  },
+  "contact": {
+    "email": "littlescientiststaipei@gmail.com"
+  },
+  "faqs": [
+    {
+      "id": "faq-1",
+      "question": "Who are the workshops for?",
+      "answer": "Our workshops are designed for elementary school students. Check each event’s registration details for its specific age group and any participation requirements."
+    },
+    {
+      "id": "faq-2",
+      "question": "What language do you teach in?",
+      "answer": "Sessions are conducted in English, with high school mentors guiding the activities. If you’re unsure whether a session is right for your child’s English level, contact us before registering."
+    },
+    {
+      "id": "faq-3",
+      "question": "What will my child explore?",
+      "answer": "Children explore ideas from physics, chemistry, and biology through experiments and hands-on activities. The exact theme and activities depend on the workshop."
+    },
+    {
+      "id": "faq-4",
+      "question": "How do I find dates, prices, and locations?",
+      "answer": "Visit our workshop page for current registration details. If no sessions are listed, contact the team to ask about upcoming opportunities. The venue and any fee are specific to each event."
+    },
+    {
+      "id": "faq-5",
+      "question": "Can you run a session at our school?",
+      "answer": "Yes. School and organization sessions typically run for 1–1.5 hours and combine an explanation, an experiment, and a hands-on activity. We provide the materials, and an ordinary classroom is suitable. Get in touch to discuss your group."
+    }
+  ],
+  "gallery": [
+    {
+      "id": "gallery-hero",
+      "src": "/assets/experiment.jpg",
+      "alt": "Children and a mentor exploring science together",
+      "x": 62,
+      "y": 50,
+      "caption": "Science workshop in Taipei."
+    },
+    {
+      "id": "gallery-discovery",
+      "src": "/assets/discovery.jpg",
+      "alt": "Young explorers working together with science mentors",
+      "x": 50,
+      "y": 50,
+      "caption": "Students working together."
+    },
+    {
+      "id": "gallery-community",
+      "src": "/assets/community.jpg",
+      "alt": "A Little Scientists Taipei workshop",
+      "x": 50,
+      "y": 50,
+      "caption": "A Little Scientists Taipei workshop."
+    }
+  ],
+  "events": [
+    {
+      "id": "english-science-camp-july-2026",
+      "title": "One-day English Science Camp",
+      "description": "The 4 July 2026 camp combined an English science workshop, lunch, and a visit to the National Taiwan Science Education Center. This is a past event; registration is closed.",
+      "startDate": "2026-07-04",
+      "endDate": "",
+      "time": "",
+      "location": "New Immigrant Community Care Center",
+      "address": "112臺北市北投區清江路177巷12號1樓",
+      "mapEmbed": "",
+      "registrationUrl": "",
+      "registrationLabel": "Register for this workshop",
+      "price": "Free (for this past event)",
+      "ages": "Elementary school students",
+      "status": "auto",
+      "visible": true,
+      "signupMode": "closed"
+    }
+  ],
+  "metrics": [
+    {
+      "value": "",
+      "label": "Children reached"
+    },
+    {
+      "value": "",
+      "label": "Workshops held"
+    },
+    {
+      "value": "",
+      "label": "Student volunteers"
+    }
+  ],
+  "team": [
+    {
+      "id": "evelyn-lee",
+      "name": "Evelyn Lee",
+      "role": "Co-founder",
+      "bio": "Taipei American School student and Little Scientists Taipei co-founder.",
+      "photo": null,
+      "photoWidth": 100,
+      "photoHeight": 320,
+      "visible": true,
+      "committee": "Co-founders",
+      "founder": true
+    },
+    {
+      "id": "alice-kuok",
+      "name": "Alice Kuok",
+      "role": "Co-founder",
+      "bio": "Taipei American School student and Little Scientists Taipei co-founder.",
+      "photo": null,
+      "photoWidth": 100,
+      "photoHeight": 320,
+      "visible": true,
+      "committee": "Co-founders",
+      "founder": true
+    }
+  ],
+  "timeline": [
+    {
+      "id": "july-2026-science-camp",
+      "title": "One-day English Science Camp",
+      "date": "2026-07-04",
+      "description": "The 4 July 2026 camp combined an English science workshop, lunch, and a visit to the National Taiwan Science Education Center. This is a past event; registration is closed.",
+      "eventId": "english-science-camp-july-2026",
+      "visible": true,
+      "location": "",
+      "planned": false
+    }
+  ],
+  "translations": {},
+  "interfaceText": {},
+  "nextWorkshop": {
+    "eventId": ""
+  },
+  "testimonials": [],
+  "foundersPhoto": null,
+  "foundersPhotoHeight": 460
+}
