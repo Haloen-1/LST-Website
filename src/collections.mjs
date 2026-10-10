@@ -29,7 +29,7 @@ export function validateCollections(input,validLink){
   return {signupMode:e.signupMode??'external',id:e.id,title:str(e.title,'Event title',160,true),description:str(e.description,'Event description',12000,visible),startDate,endDate,time:str(e.time??'','Event time',160),location:str(e.location??'','Venue name',250,visible),address:str(e.address??'','Address',500),mapEmbed:normalizeMap(str(e.mapEmbed??'','Google Maps embed',12000)),registrationUrl,registrationLabel:str(e.registrationLabel??'Register','Registration button label',80,true),price:str(e.price??'','Price',160),ages:str(e.ages??'','Ages',160),status:e.status,visible};
  });return {faqs,gallery,events,...validateExtended(input,validatePhoto)};
 }
-export function allPhotos(content){return [...Object.values(content.photos),...(content.foundersPhoto?[content.foundersPhoto]:[]),...content.gallery,...content.team.filter(m=>m.visible&&m.photo).map(m=>m.photo)];}
+export function allPhotos(content){return [...Object.values(content.photos),...(content.links.headerLogo?[{src:content.links.headerLogo}]:[]),...(content.foundersPhoto?[content.foundersPhoto]:[]),...content.gallery,...content.team.filter(m=>m.visible&&m.photo).map(m=>m.photo)];}
 export function eventStatus(event,now=new Date()){
  if(event.status!=='auto')return event.status;
  const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Taipei',year:'numeric',month:'2-digit',day:'2-digit'}).format(now);

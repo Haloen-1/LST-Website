@@ -1,4 +1,5 @@
 import {editorIdentity} from './access.mjs';
+import {renderHeader} from './header.mjs';
 import {storePhoto,knownPhotos,readPhoto,PHOTO_LIMIT} from './photos.mjs';
 import {languageFor,localizedContent,localizeResponse,interfaceDictionary} from './localization.mjs';
 import {allowedOrigin} from './origins.mjs';
@@ -25,11 +26,12 @@ function recordContent(record,draft=false){return mergeContent(record?.[draft?'d
 function renderPage(path,content,{preview=false,status=200,filter='all',event=null,timelineItem=null,lang='en'}={}){
  const asset=assets[path];if(!asset)return responseHtml('Page not found',404);
  let html=asset.text.replace(/<script src="\/(?:collections|script)\.js" defer><\/script>/g,'');
+ html=html.replace(/<header\b[\s\S]*?<\/header>/,()=>renderHeader(content));
  if(timelineItem)html=html.replace(/<!-- PAGE CONTENT START -->[\s\S]*?<!-- PAGE CONTENT END -->/,()=>timelineDetail(timelineItem,content,preview)).replace(/<title>[^<]*<\/title>/,()=>'<title>'+escapeHtml(timelineItem.title)+' | Little Scientists Taipei</title>');
  if(path==='/events.html'&&event)html=html.replace('<!-- EVENTS CONTENT START -->'+html.split('<!-- EVENTS CONTENT START -->')[1].split('<!-- EVENTS CONTENT END -->')[0]+'<!-- EVENTS CONTENT END -->',renderEventDetail(event,preview)).replace('<title>Events | Little Scientists Taipei</title>','<title>'+escapeHtml(event.title)+' | Little Scientists Taipei</title>').replace('content="Browse Little Scientists Taipei workshops, past events, locations, and registration details."','content="'+escapeHtml(event.description.slice(0,155))+'"');
  if(preview)html=html.replace('<body>','<body><div class="draft-banner">Saved draft — only visible to you. <a href="/admin">Back to editor</a></div>').replace('</head>','<meta name="robots" content="noindex,nofollow"></head>');
  const rewriter=new HTMLRewriter()
- .on('[data-google-form]',{element(el){try{const u=new URL(content.links.googleForm);if(u.protocol!=='https:'||u.hostname!=='docs.google.com'||!/^\/forms\/d\/(?:e\/)?[A-Za-z0-9_-]+\/viewform$/.test(u.pathname))return;u.search='?embedded=true';el.setInnerContent('<iframe class="google-form-frame" src="'+escapeHtml(u.href)+'" title="Workshop enquiries form / 活動洽詢表單" loading="eager" referrerpolicy="strict-origin-when-cross-origin"></iframe>',{html:true});}catch{}}})
+ .on('[data-google-form]',{element(el){try{const u=new URL(content.links.googleForm);if(u.protocol!=='https:'||u.hostname!=='docs.google.com'||!/^\/forms\/d\/(?:e\/)?[A-Za-z0-9_-]+\/viewform$/.test(u.pathname))return;u.search='?embedded=true';el.setInnerContent('<iframe class="google-form-frame" src="'+escapeHtml(u.href)+'" title="Workshop enquiries form" loading="eager" referrerpolicy="strict-origin-when-cross-origin"></iframe>',{html:true});}catch{}}})
  .on('[data-team]' ,{element(el){el.setInnerContent(renderTeam(content),{html:true});}})
  .on('[data-timeline]',{element(el){el.setInnerContent(renderTimeline(content,preview),{html:true});}})
  .on('[data-program-timeline]',{element(el){el.setInnerContent(renderTimeline(content,preview,true),{html:true});}})
@@ -65,7 +67,9 @@ const application={async fetch(request,env){
  if(path.startsWith('/admin')&&!owner)return deniedPage();
  const render=async(path,content,options={})=>{
  const version=locale=>{const c=localizedContent(content,locale);return renderPage(path,c,{...options,lang:locale,event:options.event?c.events.find(e=>e.id===options.event.id):null,timelineItem:options.timelineItem?c.timeline.find(t=>t.id===options.timelineItem.id):null});};
- const enResponse=version('en'),zhResponse=version('zh');const [en,zh]=await Promise.all([enResponse.text(),zhResponse.text()]);
+ const enResponse=version('en'),zhResponse=version('zh');let [en,zh]=await Promise.all([enResponse.text(),zhResponse.text()]);
+ // Enquiry copy stays English; the shared header still follows the selected language.
+ if(path==='/signup.html'){const main=en.match(/<main\b[\s\S]*?<\/main>/)?.[0];if(main)zh=zh.replace(/<main\b[\s\S]*?<\/main>/,()=>main.replace('<main','<main lang="en"'));}
  const pack={en,zh,dictionary:interfaceDictionary(content.translations,content.interfaceText),english:content.interfaceText||{},links:content.links};
  const serialized=JSON.stringify(pack).replaceAll('<','\\u003c');const html=(lang==='zh'?zh:en).replace('</body>','<script type="application/json" id="lst-page-pack">'+serialized+'</script></body>');
  return new Response(html,{status:enResponse.status,headers:enResponse.headers});

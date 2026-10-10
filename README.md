@@ -40,3 +40,9 @@ Bookmark `/admin`. Once Access is configured, use **Save draft → Preview saved
 In **Events**, select built-in signup, external registration, or closed. Each event can point to its own Google Form. In **Google Form**, set a published `docs.google.com/forms/.../viewform` link for the `/signup` embed. Google Forms responses and any linked Google Sheet stay with Google; linking a form does not move its responses into D1. Built-in registrations stay in D1 and support private CSV exports; they do not automatically send email or update Google Sheets.
 
 All existing editor collections remain: Impact, mission, program introduction, events, timelines, team and shared founder photo, gallery, FAQ, testimonials, company support, links/contact, and manual Chinese content. Photo hearts remain local browser preferences, without backend counts.
+
+## Shared header update
+
+**Header** (or `/admin?section=header`) manages the brand name/subtitle, logo and alt text, workshop button label, and navigation groups. Add, remove or reorder up to six menu items and ten child links per dropdown. Items without children are direct links. Set the workshop button destination in Links & Contact. Uploaded replacement logos use the existing JPEG preparation; choose Use original vector logo to restore the supplied SVG. Header label translations are editable in 中文內容.
+
+Every public page uses the same sticky header. English/中文 is directly in the header; phone layouts use a compact Menu with the same groups. Timeline action wording is under **Timeline → Lesson details / signup link label**, defaulting to “Lesson details & signup.” Enquiry page copy stays English when the rest of the site switches languages; the embedded Google Form's questions remain separately managed in Google Forms.

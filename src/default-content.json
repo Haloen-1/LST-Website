@@ -58,9 +58,9 @@
     "timelineTitle": "Workshop timeline",
     "timelineIntro": "Explore our workshops and lessons.",
     "impactTitle": "Our impact",
-    "formTitle": "Workshop enquiries & updates / 活動洽詢與最新消息",
-    "formIntro": "Leave your name and email below. A parent or guardian should complete the form for a child. This is an enquiry, not a confirmed booking.\n請留下姓名與電子郵件。兒童請由家長或監護人填寫。此表單供活動洽詢使用，不代表報名已確認。",
-    "formButton": "Open Google Form / 開啟 Google 表單",
+    "formTitle": "Workshop enquiries & updates",
+    "formIntro": "Leave your name and email below. A parent or guardian should complete the form for a child. This is an enquiry, not a confirmed booking.",
+    "formButton": "Open Google Form",
     "missionLabel": "ABOUT US",
     "missionTitle": "Our mission",
     "missionBody": "Help elementary school children explore scientific ideas, practise English, and enjoy figuring things out together.",
@@ -91,7 +91,12 @@
     "programEnquiry": "Enquiries",
     "programAsk": "Ask about the next workshop",
     "planningLabel": "THE NEXT MONTH · IN PLANNING",
-    "planningNote": "More lessons are being planned. Dates and details may change; check each listing before registering."
+    "planningNote": "More lessons are being planned. Dates and details may change; check each listing before registering.",
+    "headerBrand": "LITTLE SCIENTISTS",
+    "headerTagline": "TAIPEI · 台北小小科學家",
+    "headerLogoAlt": "Little Scientists logo",
+    "headerButton": "Find a workshop",
+    "lessonDetailsLabel": "Lesson details & signup"
   },
   "links": {
     "navPrograms": "/events",
@@ -112,7 +117,8 @@
     "testimonials": "/testimonials",
     "donations": "/donate",
     "enquiries": "/signup",
-    "missionPage": "/mission"
+    "missionPage": "/mission",
+    "headerLogo": "/assets/logo.svg"
   },
   "photos": {
     "hero": {
@@ -272,5 +278,73 @@
   },
   "testimonials": [],
   "foundersPhoto": null,
-  "foundersPhotoHeight": 460
+  "foundersPhotoHeight": 460,
+  "navigation": [
+    {
+      "label": "About us",
+      "url": "/mission",
+      "children": [
+        {
+          "label": "Our mission",
+          "url": "/mission"
+        },
+        {
+          "label": "Our team",
+          "url": "/team"
+        },
+        {
+          "label": "Our impact",
+          "url": "/impact"
+        },
+        {
+          "label": "Testimonials",
+          "url": "/testimonials"
+        }
+      ]
+    },
+    {
+      "label": "Our Programs",
+      "url": "/events",
+      "children": [
+        {
+          "label": "All programs",
+          "url": "/events"
+        },
+        {
+          "label": "Upcoming",
+          "url": "/events?filter=upcoming"
+        },
+        {
+          "label": "Past",
+          "url": "/events?filter=past"
+        },
+        {
+          "label": "Lesson timeline",
+          "url": "/timeline"
+        }
+      ]
+    },
+    {
+      "label": "Get involved",
+      "url": "/signup",
+      "children": [
+        {
+          "label": "Enquiries",
+          "url": "/signup"
+        },
+        {
+          "label": "Company support",
+          "url": "/donate"
+        },
+        {
+          "label": "FAQs",
+          "url": "/#questions"
+        },
+        {
+          "label": "Gallery",
+          "url": "/#gallery"
+        }
+      ]
+    }
+  ]
 }

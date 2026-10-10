@@ -1,6 +1,7 @@
 import defaults from './default-content.json' with {type:'json'};
 import fields from './content-schema.json' with {type:'json'};
 import {validatePhoto,validateCollections} from './collections.mjs';
+import {defaultNavigation,validateNavigation} from './header.mjs';
 export {defaults,fields};
 export const PHOTO_SLOTS=['hero','discovery','community'];
 export function validLink(value){
@@ -14,14 +15,17 @@ export function validLink(value){
 export function validateContent(input){
  if(!input||typeof input!=='object'||!input.text||!input.links||!input.photos||!input.contact)throw Error('The website content is incomplete. Reload the editor and try again.');
  const clean={text:{},links:{},photos:{},contact:{},translations:{},interfaceText:{},nextWorkshop:{eventId:''}};
+ clean.navigation=validateNavigation(input.navigation??defaultNavigation(input),validLink);
  if(input.translations!==undefined){if(!input.translations||typeof input.translations!=='object'||Array.isArray(input.translations)||Object.keys(input.translations).length>1500)throw Error('Too many translations.');for(const [key,value]of Object.entries(input.translations)){if(key.length>16000||typeof value!=='string'||value.length>20000)throw Error('Translation is too long.');if(value.trim())clean.translations[key]=value.trim();}}
  for(const field of fields){
-  const store=field.kind==='link'?'links':'text';const value=input[store][field.key];
+  const store=field.kind==='link'?'links':'text';const value=input[store][field.key]??(field.group==='Header'||field.key==='lessonDetailsLabel'?defaults[store][field.key]:undefined);
   if(typeof value!=='string'||value.length>field.max)throw Error(`${field.label} must be text with at most ${field.max} characters.`);
   if((field.required||field.kind==='heading'||field.kind==='link')&&!value.trim())throw Error(`${field.label} cannot be empty.`);
   if(field.kind==='link'&&!validLink(value))throw Error(`${field.label}: use a complete https:// URL, a /page path, or a #section link.`);
   clean[store][field.key]=value.replace(/\r\n?/g,'\n').trim();
+  if(['formTitle','formIntro','formButton'].includes(field.key))clean.text[field.key]=clean.text[field.key].split(/\n(?=[\u3400-\u9fff])| \/ (?=[\u3400-\u9fff])/u)[0];
  }
+ if(!/^\/(?:assets\/[a-zA-Z0-9._-]+\.(?:svg|png|jpg|webp)|media\/[a-f0-9-]{36}\.jpg)$/.test(clean.links.headerLogo))throw Error('Use an existing /assets/ logo image or upload a replacement in Header.');
  const email=input.contact.email;
  if(typeof email!=='string'||email.length>254||!/^([^\s@<>]+)@([^\s@<>]+)\.([^\s@<>]+)$/.test(email))throw Error('Enter a valid contact email address.');
  clean.contact.email=email.trim();
@@ -36,9 +40,9 @@ export function validateContent(input){
  return clean;
 }
 export function mergeContent(saved){
- if(!saved)return structuredClone(defaults);
+ if(!saved)return {...structuredClone(defaults),navigation:defaultNavigation(defaults)};
  const photos=Object.fromEntries(PHOTO_SLOTS.map(slot=>[slot,{...defaults.photos[slot],...saved.photos?.[slot]}]));
- return {testimonials:saved.testimonials??[],foundersPhoto:saved.foundersPhoto??null,foundersPhotoHeight:saved.foundersPhotoHeight??460,interfaceText:saved.interfaceText??{},nextWorkshop:saved.nextWorkshop??{eventId:''},translations:saved.translations??{},text:{...defaults.text,...saved.text},links:{...defaults.links,...saved.links,workshops:['/workshops','/workshops/','/workshops.html'].includes(saved.links?.workshops)?'/events':saved.links?.workshops??defaults.links.workshops},photos,contact:{...defaults.contact,...saved.contact},faqs:saved.faqs??Array.from({length:5},(_,i)=>({id:'faq-'+(i+1),question:saved.text?.['faqQuestion'+(i+1)]??defaults.faqs[i]?.question,answer:saved.text?.['faqAnswer'+(i+1)]??defaults.faqs[i]?.answer})).filter(f=>f.question&&f.answer),events:(saved.events??structuredClone(defaults.events)).map(e=>({signupMode:'external',...e})),gallery:saved.gallery??structuredClone(defaults.gallery),metrics:saved.metrics??structuredClone(defaults.metrics),team:saved.team??structuredClone(defaults.team),timeline:saved.timeline??structuredClone(defaults.timeline)};
+ return {navigation:saved.navigation??defaultNavigation({text:{...defaults.text,...saved.text},links:{...defaults.links,...saved.links}}),testimonials:saved.testimonials??[],foundersPhoto:saved.foundersPhoto??null,foundersPhotoHeight:saved.foundersPhotoHeight??460,interfaceText:saved.interfaceText??{},nextWorkshop:saved.nextWorkshop??{eventId:''},translations:saved.translations??{},text:{...defaults.text,...saved.text},links:{...defaults.links,...saved.links,workshops:['/workshops','/workshops/','/workshops.html'].includes(saved.links?.workshops)?'/events':saved.links?.workshops??defaults.links.workshops},photos,contact:{...defaults.contact,...saved.contact},faqs:saved.faqs??Array.from({length:5},(_,i)=>({id:'faq-'+(i+1),question:saved.text?.['faqQuestion'+(i+1)]??defaults.faqs[i]?.question,answer:saved.text?.['faqAnswer'+(i+1)]??defaults.faqs[i]?.answer})).filter(f=>f.question&&f.answer),events:(saved.events??structuredClone(defaults.events)).map(e=>({signupMode:'external',...e})),gallery:saved.gallery??structuredClone(defaults.gallery),metrics:saved.metrics??structuredClone(defaults.metrics),team:saved.team??structuredClone(defaults.team),timeline:saved.timeline??structuredClone(defaults.timeline)};
 }
 export function gmailLink(email,subject='Hello Little Scientists Taipei'){
  return 'https://mail.google.com/mail/?'+new URLSearchParams({view:'cm',fs:'1',tf:'1',to:email,su:subject}).toString();

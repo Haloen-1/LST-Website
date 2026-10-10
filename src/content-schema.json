@@ -886,5 +886,53 @@
     "group": "Links & Contact",
     "max": 2000,
     "required": true
+  },
+  {
+    "key": "headerBrand",
+    "label": "Brand name",
+    "group": "Header",
+    "kind": "text",
+    "max": 100,
+    "required": true
+  },
+  {
+    "key": "headerTagline",
+    "label": "Brand subtitle",
+    "group": "Header",
+    "kind": "text",
+    "max": 100,
+    "required": true
+  },
+  {
+    "key": "headerLogoAlt",
+    "label": "Logo description",
+    "group": "Header",
+    "kind": "text",
+    "max": 100,
+    "required": true
+  },
+  {
+    "key": "headerLogo",
+    "label": "Logo image URL",
+    "group": "Header",
+    "kind": "link",
+    "max": 2000,
+    "required": true
+  },
+  {
+    "key": "headerButton",
+    "label": "Workshop button label",
+    "group": "Header",
+    "kind": "text",
+    "max": 100,
+    "required": true
+  },
+  {
+    "key": "lessonDetailsLabel",
+    "label": "Lesson details / signup link label",
+    "group": "Timeline",
+    "kind": "text",
+    "max": 100,
+    "required": true
   }
 ]

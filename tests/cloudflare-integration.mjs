@@ -13,6 +13,11 @@ try{
  const home=parseHTML(await(await request('/')).text()).document;assert.equal(home.querySelector('.hero-actions [data-link="missionPage"]').getAttribute('href'),content.links.missionPage);assert.equal(home.querySelector('[data-new-tab]').getAttribute('target'),'_blank');assert.equal(home.querySelector('.dialog-caption'),null);assert.equal(home.querySelectorAll('[data-gallery] .gallery-item').length,3);
  assert.equal(parseHTML(await(await request('/team')).text()).document.querySelector('[data-metrics]'),null);
  const signup=parseHTML(await(await request('/signup')).text()).document;assert.ok(signup.querySelector('iframe').getAttribute('src').startsWith('https://docs.google.com/forms/'));
+ const chineseSignup=parseHTML(await(await request('/signup?lang=zh')).text()).document;
+ assert.equal(chineseSignup.querySelector('main').textContent,signup.querySelector('main').textContent);
+ assert.equal(chineseSignup.querySelector('main').getAttribute('lang'),'en');
+ assert.equal(signup.querySelector('header').innerHTML,home.querySelector('header').innerHTML);
+ assert.equal(signup.querySelectorAll('.header-dropdown').length,3);
  assert.ok((await(await request('/api/search?q=Evelyn')).json()).results.length>0);
  assert.equal((await request('/api/language?preview=draft')).status,403);
  assert.equal((await request('/api/editor',{headers:{cookie:'CF_Authorization=forged','Cf-Access-Authenticated-User-Email':'owner@local.test'}})).status,401);

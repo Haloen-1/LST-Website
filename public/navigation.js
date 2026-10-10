@@ -23,13 +23,12 @@ function translateUI(root){
 function updateUI(){
  document.querySelectorAll('.site-tools,.tools-dialog,.gallery-status,.signup-status').forEach(translateUI);
  document.querySelectorAll('.like-button').forEach(button=>{const label=button.querySelector('.like-label');if(label)label.textContent=tr(button.getAttribute('aria-pressed')==='true'?'Liked':'Like');});
- document.querySelectorAll('.language-switch').forEach(button=>{button.textContent=lang==='zh'?'中文 · EN':'EN · 中文';button.setAttribute('aria-checked',String(lang==='zh'));button.setAttribute('aria-label',lang==='zh'?'Switch to English':'切換至繁體中文');});
+ document.querySelectorAll('.language-switch').forEach(button=>{button.textContent=lang==='zh'?'EN / 中文':'EN / 中文';button.setAttribute('aria-checked',String(lang==='zh'));button.setAttribute('aria-label',lang==='zh'?'Switch to English':'切換至繁體中文');});
 }
 window.lstSetLanguage=next=>{
  if(!pack||!['en','zh'].includes(next))return;lang=next;const target=parse(pack[lang]),active=document.activeElement;
  for(const selector of ['main','footer','.skip-link','.mobile-cta']){const current=document.querySelector(selector),other=target.querySelector(selector);if(current&&other)patch(current,other);}
- for(const current of document.querySelectorAll('header a')){const key=current.getAttribute('data-link');const other=key?target.querySelector('header a[data-link="'+CSS.escape(key)+'"]'):target.querySelector(current.matches('.brand')?'header .brand':'header .nav-cta');if(other)patch(current,other);}
- const nav=document.querySelector('#main-nav');if(nav)nav.setAttribute('aria-label',target.querySelector('#main-nav')?.getAttribute('aria-label')||tr('Main navigation'));
+ const header=document.querySelector('header'),otherHeader=target.querySelector('header');if(header&&otherHeader){header.replaceChildren(...otherHeader.childNodes);window.lstInitTools?.();}
  document.documentElement.lang=lang==='zh'?'zh-Hant':'en';document.title=target.title;document.cookie='lst_language='+lang+'; Path=/; Max-Age=31536000; SameSite=Lax'+(location.protocol==='https:'?'; Secure':'');const url=new URL(location.href);url.searchParams.set('lang',lang);history.replaceState({lst:true},'',url);updateUI();if(active?.isConnected)active.focus({preventScroll:true});updateProgress();
 };
 const progress=document.createElement('div');progress.className='scroll-progress';progress.setAttribute('aria-hidden','true');document.body.append(progress);
@@ -59,7 +58,7 @@ async function navigate(url,mode='push'){
   }
   for(const link of target.querySelectorAll('link[rel=stylesheet]'))if(!document.querySelector('link[href="'+CSS.escape(link.getAttribute('href'))+'"]'))document.head.append(link.cloneNode(true));
   const main=target.querySelector('main'),header=target.querySelector('header'),footer=target.querySelector('footer');if(!main||!header)throw Error('Invalid page');
-  document.querySelector('.photo-dialog')?.close();document.querySelectorAll('.photo-dialog,.tools-dialog,.site-tools').forEach(n=>n.remove());document.querySelector('main').replaceWith(main);document.querySelector('header').replaceWith(header);if(footer)document.querySelector('footer')?.replaceWith(footer);
+  document.querySelector('.photo-dialog')?.close();document.querySelectorAll('.photo-dialog,.tools-dialog,.site-tools').forEach(n=>n.remove());document.querySelector('main').replaceWith(main);if(footer)document.querySelector('footer')?.replaceWith(footer);
   const photoDialog=target.querySelector('.photo-dialog');if(photoDialog&&!document.querySelector('.photo-dialog'))document.body.append(photoDialog);
   document.querySelector('.mobile-cta')?.remove();const mobileCta=target.querySelector('.mobile-cta');if(mobileCta)document.body.append(mobileCta);
   pack=next;window.lstPageLinks=pack.links;uiOriginal=new WeakMap();uiAttributes=new WeakMap();const skip=target.querySelector('.skip-link');if(skip)document.querySelector('.skip-link')?.replaceWith(skip);document.title=target.title;document.documentElement.lang=lang==='zh'?'zh-Hant':'en';document.querySelector('#lst-page-pack')?.remove();url.searchParams.set('lang',lang);if(mode==='push')history.pushState({lst:true},'',url);
