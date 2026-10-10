@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      jose:
+        specifier: 6.2.3
+        version: 6.2.3
     devDependencies:
       drizzle-kit:
         specifier: 0.31.10
@@ -20,6 +24,9 @@ importers:
       linkedom:
         specifier: ^0.18.12
         version: 0.18.13
+      miniflare:
+        specifier: 4.20260515.0
+        version: 4.20260515.0
       wrangler:
         specifier: 4.92.0
         version: 4.92.0
@@ -1069,6 +1076,9 @@ packages:
   htmlparser2@10.1.0:
     resolution: {integrity: sha512-VTZkM9GWRAtEpveh7MSF6SjjrpNVNNVJfFup7xTY3UpFtm67foy9HDVXneLtFVt4pMz5kZtgNcvCniNFb1hlEQ==}
 
+  jose@6.2.3:
+    resolution: {integrity: sha512-YYVDInQKFJfR/xa3ojUTl8c2KoTwiL1R5Wg9YCydwH0x0B9grbzlg5HC7mMjCtUJjbQ/YnGEZIhI5tCgfTb4Hw==}
+
   kleur@4.1.5:
     resolution: {integrity: sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==}
     engines: {node: '>=6'}
@@ -1840,6 +1850,8 @@ snapshots:
       domhandler: 5.0.3
       domutils: 3.2.2
       entities: 7.0.1
+
+  jose@6.2.3: {}
 
   kleur@4.1.5: {}
 

@@ -16,3 +16,5 @@ export const signups=sqliteTable('signups',{
  id:text('id').primaryKey(),eventId:text('event_id').notNull(),eventTitle:text('event_title').notNull(),participantName:text('participant_name').notNull(),email:text('email').notNull(),emailOptIn:integer('email_opt_in').notNull().default(0),createdAt:text('created_at').notNull(),privacyVersion:text('privacy_version').notNull(),
 },t=>[uniqueIndex('signups_event_email_name').on(t.eventId,t.email,t.participantName)]);
 export const signupLimits=sqliteTable('signup_limits',{id:text('id').primaryKey(),attempts:integer('attempts').notNull(),createdAt:text('created_at').notNull()});
+
+export const uploadedPhotos=sqliteTable('uploaded_photos',{key:text('key').primaryKey(),bytes:integer('bytes').notNull(),etag:text('etag').notNull(),createdAt:text('created_at').notNull()});

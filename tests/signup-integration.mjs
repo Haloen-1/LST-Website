@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';import {defaults} from '../src/content.mjs';
-const base='http://127.0.0.1:8787',owner={'oai-authenticated-user-id':'owner','oai-authenticated-user-email':'owner@local.test',Origin:'http://127.0.0.1:8765','X-LST-Editor':'1','Content-Type':'application/json'};
-const req=(path,options={})=>fetch(base+path,options),post=(path,data,headers=owner)=>req(path,{method:'POST',headers,body:JSON.stringify(data)});
+import {harness} from './harness.mjs';
+const {mf,headers:owner,request:req,post:send}=await harness();
+const post=(path,data,headers=owner)=>req(path,{method:'POST',headers:{'Content-Type':'application/json',...headers},body:JSON.stringify(data)});
+try{
 const initial=await(await req('/api/editor',{headers:owner})).json();let revision=initial.revision;const content=structuredClone(defaults);const suffix=Date.now().toString();const event={...content.events[0],id:'signup-test-'+suffix,title:'Test workshop',description:'**Lesson overview**\nA safe test description.',startDate:'2099-01-01',status:'upcoming',signupMode:'builtin',visible:true};content.events.unshift(event);content.timeline.push({id:'lesson-test-'+suffix,title:'Test lesson',date:'2099-01-01',description:'**Lesson notes**',eventId:event.id,visible:true});content.metrics[0].value='60+';content.team[0].photo={...defaults.photos.hero};
 const published=await post('/api/editor/publish',{content,revision});assert.equal(published.status,200);revision=(await published.json()).revision;
 try{
@@ -13,6 +15,8 @@ try{
  const optEmail='optin-'+suffix+'@example.invalid';assert.equal((await post('/api/signup',{...data,name:'Local test',email:optEmail,emailOptIn:true},headers)).status,201);
  const csv=await(await req('/api/editor/signups.csv',{headers:owner})).text();assert.ok(csv.includes("\"'=SUM(1+1)\""),'CSV formula not neutralized');const opted=await(await req('/api/editor/signups.csv?list=email',{headers:owner})).text();assert.ok(opted.includes(optEmail));assert.ok(!opted.includes(data.email),'Non-consenting email leaked into marketing export');
  const lesson=await(await req('/timeline/'+content.timeline.at(-1).id)).text();assert.ok(lesson.includes('<strong>Lesson notes</strong>'));assert.ok(lesson.includes('/events/'+event.id));assert.equal((await req('/cookies')).status,200);assert.equal((await req('/team')).status,200);
- const tid=content.timeline.at(-1).id;const reactHeaders={Origin:owner.Origin,'X-LST-Gallery':'1','Content-Type':'application/json'};const reaction=await post('/api/timeline/'+tid+'/like',{liked:true},reactHeaders);assert.equal(reaction.status,200);const cookie=reaction.headers.get('set-cookie').split(';')[0];assert.equal((await post('/api/timeline/'+tid+'/like',{liked:false},{...reactHeaders,Cookie:cookie})).status,200);
- console.log('PASS: signup storage, deduplication, privacy consent, separate email opt-ins, CSV safety, private exports, styled lessons, timeline reactions, team pages, and cookies.');
+ assert.equal((await post('/api/timeline/retired/like',{liked:true})).status,410);
+ console.log('PASS: signup storage, deduplication, privacy consent, separate email opt-ins, CSV safety, private exports, styled lessons, retired timeline reactions, team pages, and cookies.');
 }finally{assert.equal((await post('/api/editor/publish',{content:defaults,revision})).status,200);}
+
+}finally{await mf.dispose();}

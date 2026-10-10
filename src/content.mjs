@@ -44,12 +44,7 @@ export function gmailLink(email,subject='Hello Little Scientists Taipei'){
  return 'https://mail.google.com/mail/?'+new URLSearchParams({view:'cm',fs:'1',tf:'1',to:email,su:subject}).toString();
 }
 export function escapeHtml(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-export function isOwner(request,env){
- const id=request.headers.get('oai-authenticated-user-id');
- const email=request.headers.get('oai-authenticated-user-email');
- const allowed=[env.EDITOR_EMAIL,...String(env.EDITOR_EMAILS||'').split(',')].filter(Boolean).map(value=>value.trim().toLowerCase());
- return !!(id&&email&&allowed.includes(email.trim().toLowerCase()));
-}
+
 export function jpegDimensions(bytes){
  if(bytes.length<20||bytes[0]!==255||bytes[1]!==216||bytes[bytes.length-2]!==255||bytes[bytes.length-1]!==217)return null;
  let p=2;

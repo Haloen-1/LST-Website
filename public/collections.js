@@ -1,3 +1,5 @@
+// Retry only newly uploaded media; KV misses must not become permanent broken images.
+if(!window.lstPhotoRetryInstalled){window.lstPhotoRetryInstalled=true;document.addEventListener('error',event=>{const img=event.target;if(!(img instanceof HTMLImageElement))return;const url=new URL(img.src,location.href);if(url.origin!==location.origin||!url.pathname.startsWith('/media/'))return;const n=Number(img.dataset.photoRetry||0);if(n>=7)return;img.dataset.photoRetry=String(n+1);setTimeout(()=>{if(img.isConnected){url.searchParams.set('retry',String(n+1));img.src=url.href;}},Math.min(1500*2**n,15000));},true);}
 window.lstInitCollections=()=>{
 document.querySelectorAll('[data-map-src]').forEach(button=>button.addEventListener('click',()=>{
  const frame=document.createElement('iframe');frame.src=button.dataset.mapSrc;frame.title=button.dataset.mapTitle;frame.loading='lazy';frame.referrerPolicy='no-referrer-when-downgrade';frame.allowFullscreen=true;frame.className='venue-map';button.closest('.map-placeholder').replaceWith(frame);

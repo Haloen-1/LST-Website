@@ -1,1 +1,27 @@
-{"name":"little-scientists-taipei","version":"2.0.0","private":true,"type":"module","scripts":{"build":"node scripts/build.mjs","dev":"wrangler dev --local --ip 127.0.0.1 --port 8787","db:generate":"drizzle-kit generate","test":"node --test tests/*.test.mjs"},"devDependencies":{"drizzle-kit":"0.31.10","drizzle-orm":"0.45.2","esbuild":"^0.25.0","linkedom":"^0.18.12","wrangler":"4.92.0"}}
+{
+  "name": "little-scientists-taipei",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "wrangler dev --local --ip 127.0.0.1 --port 8787",
+    "db:generate": "drizzle-kit generate",
+    "test": "node --test tests/*.test.mjs",
+    "test:integration": "node scripts/test-integration.mjs",
+    "restore:prepare": "node scripts/prepare-restore.mjs",
+    "db:local": "wrangler d1 migrations apply DB --local",
+    "check:staging": "node scripts/check-staging.mjs"
+  },
+  "devDependencies": {
+    "drizzle-kit": "0.31.10",
+    "drizzle-orm": "0.45.2",
+    "esbuild": "^0.25.0",
+    "linkedom": "^0.18.12",
+    "miniflare": "4.20260515.0",
+    "wrangler": "4.92.0"
+  },
+  "dependencies": {
+    "jose": "6.2.3"
+  }
+}

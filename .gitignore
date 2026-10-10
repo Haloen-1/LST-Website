@@ -8,3 +8,11 @@ node_modules/
 .env
 src/generated-assets.mjs
 dist/
+
+# Local migration configuration, credentials, and backups
+.dev.vars.*
+.env.*
+!.env.example
+wrangler.staging.json
+.migration-output/
+*.zip

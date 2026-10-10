@@ -1,0 +1,42 @@
+{
+  "name": "little-scientists-staging",
+  "main": "dist/server/index.js",
+  "compatibility_date": "2026-05-15",
+  "workers_dev": true,
+  "preview_urls": false,
+  "routes": [],
+  "assets": {
+    "directory": "./dist/assets",
+    "binding": "ASSETS",
+    "html_handling": "none",
+    "not_found_handling": "none",
+    "run_worker_first": [
+      "/admin*",
+      "/api/*",
+      "/media/*",
+      "/robots.txt",
+      "/sitemap.xml"
+    ]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "little-scientists-staging",
+      "database_id": "REPLACE_WITH_STAGING_D1_ID",
+      "migrations_dir": "drizzle"
+    }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "PHOTOS",
+      "id": "REPLACE_WITH_STAGING_KV_ID"
+    }
+  ],
+  "vars": {
+    "STAGING": "true",
+    "PUBLIC_ORIGIN": "https://little-scientists-staging.YOUR-SUBDOMAIN.workers.dev",
+    "ACCESS_ISSUER": "https://YOUR-TEAM.cloudflareaccess.com",
+    "ACCESS_AUD": "REPLACE_WITH_ACCESS_APPLICATION_AUD",
+    "EDITOR_EMAILS": "REPLACE_WITH_APPROVED_EDITOR_EMAILS"
+  }
+}
