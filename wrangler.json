@@ -1,0 +1,1 @@
+{"name":"little-scientists-taipei","main":"dist/server/index.js","compatibility_date":"2026-05-15","d1_databases":[{"binding":"DB","database_name":"little-scientists-content","database_id":"local-preview-db","migrations_dir":"drizzle"}],"r2_buckets":[{"binding":"BUCKET","bucket_name":"little-scientists-photos"}]}

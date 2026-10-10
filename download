@@ -1,0 +1,10 @@
+.sites-runtime/
+tmp/
+*.tar.gz
+*.tar
+node_modules/
+.wrangler/
+.dev.vars
+.env
+src/generated-assets.mjs
+dist/

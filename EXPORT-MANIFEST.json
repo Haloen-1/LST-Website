@@ -1,0 +1,681 @@
+{
+  "sourceCommit": "741da6b70fd9879be910a0a9d12f4f1255a92f65",
+  "trackedSourceFiles": 90,
+  "files": [
+    {
+      "path": ".env.example",
+      "bytes": 119,
+      "sha256": "d04c3e3835fbad0451927a20aa4adb3acd0b7c66f431533b33292fdaff83a157"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 107,
+      "sha256": "00fd98847a3206586527bf5a7a9250f3b9ea10321b27133b9a3c235643e89d5f"
+    },
+    {
+      "path": ".openai/hosting.json",
+      "bytes": 95,
+      "sha256": "e62d28a568d99689aa4ddd622c34d74499eec7c41f1d12988a4376babdd74131"
+    },
+    {
+      "path": "db/schema.ts",
+      "bytes": 1444,
+      "sha256": "4e647f594a5520a2a36b4316bb0c406d1720e843e862c2d995fdec4c0cdae36e"
+    },
+    {
+      "path": "drizzle/0000_dusty_nuke.sql",
+      "bytes": 215,
+      "sha256": "39df6a676570064b8e6907713da59969f08cbf1cda9f50cbdcf34168f7cd7c6a"
+    },
+    {
+      "path": "drizzle/0001_fluffy_jean_grey.sql",
+      "bytes": 129,
+      "sha256": "4dff57dd630b3ef16f119b7e57635b992785de37f934101c47c28ea8170a8a2b"
+    },
+    {
+      "path": "drizzle/0002_mature_slyde.sql",
+      "bytes": 715,
+      "sha256": "20b4b716d3b5692bb1b982993aac6681e49bdd24a66dad03fe1b98fc1274fa29"
+    },
+    {
+      "path": "drizzle/meta/0000_snapshot.json",
+      "bytes": 1665,
+      "sha256": "15b4fc02a9c7d1347f7cf2ce89ec2b18671bd7d75ece3b22e8ca530535f3c207"
+    },
+    {
+      "path": "drizzle/meta/0001_snapshot.json",
+      "bytes": 2466,
+      "sha256": "c934a392aa8af09b30b4e14cc54baa3f4dd77c7a74512dedaba8277e0338b026"
+    },
+    {
+      "path": "drizzle/meta/0002_snapshot.json",
+      "bytes": 5996,
+      "sha256": "f1bf3817da263aab733f9b6a7123483e5c1dbfbeb15e871b05e155900a8f0d81"
+    },
+    {
+      "path": "drizzle/meta/_journal.json",
+      "bytes": 484,
+      "sha256": "4434cbc4d06d08516d6eda3590e0ff491a77464ead9c0f8385be79b3b9f6b974"
+    },
+    {
+      "path": "drizzle.config.ts",
+      "bytes": 133,
+      "sha256": "98ce916dbc6ac36109c0c41d0d39bdf7d4c97d00bfe875f7e2267766307abba7"
+    },
+    {
+      "path": "EXPORT-README.md",
+      "bytes": 4902,
+      "sha256": "090f184f113f186e096243b5320330cd33f7822ada0d66ba24f29965d02b68ff"
+    },
+    {
+      "path": "output/Bilingual Google Form copy.md",
+      "bytes": 2820,
+      "sha256": "4cf3e2aed902d3c130ab6ae9e51260cb5a1c24923d98c74fdc6629f7ad9f01f5"
+    },
+    {
+      "path": "output/Cloudflare domain setup.md",
+      "bytes": 1380,
+      "sha256": "888db3a7a0c48929ebacb4db17cba9edf604cc8968c689e2b3c575c0930e3620"
+    },
+    {
+      "path": "output/Website checklist and FAQ worksheet.md",
+      "bytes": 15610,
+      "sha256": "5c786af4a6687993221efc9902863f075609fe90bc9a8e09caad3b299b1045f8"
+    },
+    {
+      "path": "package.json",
+      "bytes": 390,
+      "sha256": "af52bc89f5d3a627ae2fb0210d0a00f9af74c990d10a18dfeb250d35e4549a01"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "bytes": 61700,
+      "sha256": "0731e0becad103f3f8d577b3325cd08eec76c235da02abe730441120424c0c12"
+    },
+    {
+      "path": "pnpm-workspace.yaml",
+      "bytes": 59,
+      "sha256": "5bd3a15033fce656e8df61cf1997b75712f59df0a9712cbd13f3edb652c046b5"
+    },
+    {
+      "path": "public/404.html",
+      "bytes": 1246,
+      "sha256": "3dee160a63b662b817f96fc14c25b036492f7e588fa76488af3dddb83d3a5e53"
+    },
+    {
+      "path": "public/admin.css",
+      "bytes": 7749,
+      "sha256": "3110eaf30efd155fc9437885abd147bd341ba81dea8af1099e5d9674069c7d79"
+    },
+    {
+      "path": "public/admin.html",
+      "bytes": 2693,
+      "sha256": "e2a606570a3bae869f6dffb7954a5c265db5a2f1cff7d39929bd1bef3c11f822"
+    },
+    {
+      "path": "public/admin.js",
+      "bytes": 42602,
+      "sha256": "354bb8aad5186876058db8effab5c4169d4d5fcc524119c4e2a9242507e981c0"
+    },
+    {
+      "path": "public/assets/community.jpg",
+      "bytes": 100560,
+      "sha256": "a7f358c777556b3d60050a18a73baa8431f86d66003102b3e7b2ef1044117695"
+    },
+    {
+      "path": "public/assets/discovery.jpg",
+      "bytes": 452104,
+      "sha256": "a810fb9a0404c46018188b2d929d87fa22420c4f563752017f4abd833ee51eb7"
+    },
+    {
+      "path": "public/assets/DM-Sans-LICENSE.txt",
+      "bytes": 4389,
+      "sha256": "2af94f4fb533be8fa23282eb33e08ca311ddf47c2f32777e2040b282deeec65c"
+    },
+    {
+      "path": "public/assets/experiment.jpg",
+      "bytes": 479905,
+      "sha256": "a7865ea2166726abd990092e0b1c82d84562de9d0964eb6aba005bf6236d6f98"
+    },
+    {
+      "path": "public/assets/favicon.svg",
+      "bytes": 363,
+      "sha256": "9a9993ee670010faf26eb28a7f27045ac55215caacbc78d00ff843a42a871b4f"
+    },
+    {
+      "path": "public/assets/fonts.css",
+      "bytes": 1016,
+      "sha256": "5297247878684fbdcb91c8a98ae4a6fbcc77ac0cff6b2536d1861441ffcdab62"
+    },
+    {
+      "path": "public/assets/Libre-Caslon-Display-LICENSE.txt",
+      "bytes": 4403,
+      "sha256": "9cc8cef15f5e8bcbe99a13ee8d268f6f6f6a5811cd1ed05056ef4608c9b16fd1"
+    },
+    {
+      "path": "public/assets/logo.png",
+      "bytes": 41889,
+      "sha256": "985da5177c4537d533facfd6f9333f150bd53b32a65d8e050de253fcad574daf"
+    },
+    {
+      "path": "public/assets/logo.svg",
+      "bytes": 132910,
+      "sha256": "4f9eaa3d5d7b6fb326d51a20bfcb3f4bced469ba4151cb40973e64b9b2b608ad"
+    },
+    {
+      "path": "public/assets/rP2tp2ywxg089UriI5-g4vlH9VoD8CmcqZG40F9JadbnoEwAfJthTg.ttf",
+      "bytes": 48280,
+      "sha256": "b79a2ea7a38f33fd96a282fadb9ce97626bb0724a44d21075859f0e50239993a"
+    },
+    {
+      "path": "public/assets/rP2tp2ywxg089UriI5-g4vlH9VoD8CmcqZG40F9JadbnoEwAkJxhTg.ttf",
+      "bytes": 48308,
+      "sha256": "376427b5322148d8de1e03f263bcca4935a2d60ba71d9f94f4947ab664c711ae"
+    },
+    {
+      "path": "public/assets/rP2tp2ywxg089UriI5-g4vlH9VoD8CmcqZG40F9JadbnoEwAopxhTg.ttf",
+      "bytes": 48280,
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    {
+      "path": "public/assets/rP2tp2ywxg089UriI5-g4vlH9VoD8CmcqZG40F9JadbnoEwARZthTg.ttf",
+      "bytes": 48200,
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    {
+      "path": "public/assets/TuGOUUFxWphYQ6YI6q9Xp61FQzxDRKmzr2lR.ttf",
+      "bytes": 91588,
+      "sha256": "199b2a7deefd8d7d9bae05d34902c4c6486bd11b8e5d1a22c0cea8862943a5a1"
+    },
+    {
+      "path": "public/brand.css",
+      "bytes": 14277,
+      "sha256": "377e6401d8695ad2613f042cef1d6fc435580bfd05cfc9caa7615083d9049e95"
+    },
+    {
+      "path": "public/collections.js",
+      "bytes": 7374,
+      "sha256": "30bb1fece1fd7104d64992d9dec5296cff97dfb70fd97242ec72e11b0ac79655"
+    },
+    {
+      "path": "public/cookies.html",
+      "bytes": 3897,
+      "sha256": "a41f24d53718ed001158aff2aa14cbd3ed776b5226ecda5d9c33558e8eeb3f99"
+    },
+    {
+      "path": "public/donate.html",
+      "bytes": 2772,
+      "sha256": "b49b4d2e41ee9eee4bf55d33acffa4bf1d6745c7e907da0754b10985d441dc59"
+    },
+    {
+      "path": "public/events.html",
+      "bytes": 3165,
+      "sha256": "3e2a19b885c2e8e3525c25151a2713847b6bc585f2af1bfa06d1df1a071ddd53"
+    },
+    {
+      "path": "public/formatting.js",
+      "bytes": 1284,
+      "sha256": "c1b7603699b6828ed51d82cd5aa2e69d09b5f6d065eb8b3f0aef05ab6210b99f"
+    },
+    {
+      "path": "public/i18n-data.json",
+      "bytes": 33542,
+      "sha256": "87ebc89dced380395c831af8bf103cb9f544c2a9ba78110d9994c2dd587c96d7"
+    },
+    {
+      "path": "public/i18n.js",
+      "bytes": 25,
+      "sha256": "4882a0e40cc8f046252d30e8d1d2561b07ac44124b00ac12a3083506291466ce"
+    },
+    {
+      "path": "public/impact.html",
+      "bytes": 3030,
+      "sha256": "e0bad62a7ad44ef915300e6add67c5c1dada19f673ea66ef8b485e4446869089"
+    },
+    {
+      "path": "public/index.html",
+      "bytes": 10135,
+      "sha256": "16bd00c96837bb87db0604bee57e9c6d3a5083075f4ac27d5995290d8dcd5c65"
+    },
+    {
+      "path": "public/layout-update.css",
+      "bytes": 9791,
+      "sha256": "7dad564fb89f2a18678f0e889f8b54f869566daed90f911f5aae2a63bf1ff368"
+    },
+    {
+      "path": "public/mission.html",
+      "bytes": 2647,
+      "sha256": "2a5fbcaeec9b4df33d135853d129318c469f158b320cf4268047bbc3ae77e111"
+    },
+    {
+      "path": "public/navigation.js",
+      "bytes": 11339,
+      "sha256": "4e3de8c36c95459c21402807e7c565950fa4f01b73ea8e361eb674c6d43b368d"
+    },
+    {
+      "path": "public/privacy.html",
+      "bytes": 6405,
+      "sha256": "9e70ebe660c80989ba5668fa6db1253cd2181a7b9f692eb372d4f47a22c570b5"
+    },
+    {
+      "path": "public/refinements.css",
+      "bytes": 930,
+      "sha256": "52ef6ef07f56d4386f281e4333c0cf9315609751fbdfd61163c5ce96a7106ac3"
+    },
+    {
+      "path": "public/robots.txt",
+      "bytes": 145,
+      "sha256": "41ded24388e7e0df85d22eb3013be063660a6b90ac9a93b914006495b3f9d15a"
+    },
+    {
+      "path": "public/science-camp.html",
+      "bytes": 5250,
+      "sha256": "c206c120f1b721810d49e576e339aee8f50067719019ff997db708a007930999"
+    },
+    {
+      "path": "public/script.js",
+      "bytes": 4526,
+      "sha256": "515bb361d9f9ec61404d64ab3b076fc464ceaacb0fc72bfe52c25b7f5736d50b"
+    },
+    {
+      "path": "public/sections.css",
+      "bytes": 9164,
+      "sha256": "ef7d9d05b6e1289016a291d6518234bd43a47da2e4deb2c03ec5f11488c74942"
+    },
+    {
+      "path": "public/signup.html",
+      "bytes": 3114,
+      "sha256": "44aa86f43645a78154052298a54f0c354e4141fea15f0503b973b8138a83b833"
+    },
+    {
+      "path": "public/site-tools.css",
+      "bytes": 11739,
+      "sha256": "8193633eb0fd3b167a032cfe8e7147ae2d6fe0bf2e3a0052a48602490cb32c84"
+    },
+    {
+      "path": "public/site-tools.js",
+      "bytes": 6872,
+      "sha256": "64b87c71efe3c4894c4c5668fff1e3d95c640b6d1e055cfb25a289f563f34b52"
+    },
+    {
+      "path": "public/sitemap.xml",
+      "bytes": 483,
+      "sha256": "ffbadf8651d30accdc8dba22afe686d097e78c76409e093da9e7d7dcff32d309"
+    },
+    {
+      "path": "public/styles.css",
+      "bytes": 6648,
+      "sha256": "8245f4d53e44b9a9a7db782d124945a6f400878a6a46d06fb54208768abd9e8f"
+    },
+    {
+      "path": "public/team.html",
+      "bytes": 2851,
+      "sha256": "0755fc0ad05e3e31c73633bb7b31d05a4ee211364106379272e7aaea52daa93d"
+    },
+    {
+      "path": "public/testimonials.html",
+      "bytes": 2583,
+      "sha256": "b7a825e61004fd0e7c762ee37ccc760861403598a43cc24b684aa8d2bce50ddf"
+    },
+    {
+      "path": "public/timeline.html",
+      "bytes": 2662,
+      "sha256": "7a630e7089fdcc023a22b947013d9483f052bf6fa376dd8fe1a118887d0064f4"
+    },
+    {
+      "path": "public/workshops.html",
+      "bytes": 3978,
+      "sha256": "7df627088928d670c401bfe235d6ccfedf728c33d3686d00115b9a20132a9eb3"
+    },
+    {
+      "path": "published-snapshot/manifest.json",
+      "bytes": 3282,
+      "sha256": "c11167149189b198d9e817a6b95fd58e7f6549880d61328634d4bfe6b49b4b7e"
+    },
+    {
+      "path": "published-snapshot/page-data/cookies.json",
+      "bytes": 43705,
+      "sha256": "00a782cfe6000ba12c91f42fa90f35afaea7b4fdd38c68344153820e1ff3587a"
+    },
+    {
+      "path": "published-snapshot/page-data/donate.json",
+      "bytes": 42590,
+      "sha256": "c349f257d87c643a41e053e25efdb7ee993425c44f59d9ed01dc529aba27422b"
+    },
+    {
+      "path": "published-snapshot/page-data/events.json",
+      "bytes": 44280,
+      "sha256": "5c378dd0125af3e2de02b9f9ee2b9df22225bb5b1f839a586147d5509386f493"
+    },
+    {
+      "path": "published-snapshot/page-data/events__english-science-camp-july-2026.json",
+      "bytes": 43187,
+      "sha256": "ec1291fa6cc865cb45bf679652e0f407c84b1dc5b6a7dfa61236a8e6ad11627f"
+    },
+    {
+      "path": "published-snapshot/page-data/home.json",
+      "bytes": 66641,
+      "sha256": "d30fd59aa3bdf7964478f526ad5edd368532d3b5a6f4d79e53dc71ee726be15f"
+    },
+    {
+      "path": "published-snapshot/page-data/impact.json",
+      "bytes": 45159,
+      "sha256": "a1b0ccbb318d5da2d64f8a0b0aa3d7cc1e27bf97aa352f562e43c107304f06ff"
+    },
+    {
+      "path": "published-snapshot/page-data/mission.json",
+      "bytes": 42318,
+      "sha256": "6f471a718f6b862455c243942faa88d96a59b8ee6a1f89ce01742b53628a9172"
+    },
+    {
+      "path": "published-snapshot/page-data/privacy.json",
+      "bytes": 48403,
+      "sha256": "7b3ba66afd2e76b8b71df53699be7eb57f197a863ebafcf7ea150d7a7eaace93"
+    },
+    {
+      "path": "published-snapshot/page-data/science-camp.json",
+      "bytes": 46105,
+      "sha256": "2ac5d52e3c2d2e47bfe2c814adf94223acd8c7a59415e00402909707cd14f279"
+    },
+    {
+      "path": "published-snapshot/page-data/signup.json",
+      "bytes": 43372,
+      "sha256": "505ace5c9e1587cfe3f2522d5ea76b12ab27ce34cb91f458b7baf5a4202483a2"
+    },
+    {
+      "path": "published-snapshot/page-data/team.json",
+      "bytes": 43050,
+      "sha256": "e79a172029eb2c948ccde5349c8e6585bbbffc5e811fc63cf4351381e7b0537e"
+    },
+    {
+      "path": "published-snapshot/page-data/testimonials.json",
+      "bytes": 41776,
+      "sha256": "4913a6db9c20f6df085f37a747eaee67c045fd680c9f4dd312df310b71553272"
+    },
+    {
+      "path": "published-snapshot/page-data/timeline.json",
+      "bytes": 43427,
+      "sha256": "77e36024be99c2a68aefec6a87be5e3118736ad7cb9afb79dbfeee671ce31239"
+    },
+    {
+      "path": "published-snapshot/page-data/timeline__july-2026-science-camp.json",
+      "bytes": 41531,
+      "sha256": "feef0fedfc221ebbc2c7c12982867b0239799cf62eb75b593d4f22d78f30c552"
+    },
+    {
+      "path": "published-snapshot/pages/cookies.en.html",
+      "bytes": 4257,
+      "sha256": "ee0cb717e6b2dbf70390a944ca43368446a54c82093c18a09aa201a6bc73a038"
+    },
+    {
+      "path": "published-snapshot/pages/cookies.zh.html",
+      "bytes": 4164,
+      "sha256": "25726b3f6aba75ee0ca7e33cab5ae0b42cc1b6d72cd44912c1cfd77956681eb4"
+    },
+    {
+      "path": "published-snapshot/pages/donate.en.html",
+      "bytes": 3677,
+      "sha256": "4c1d23f9511bf5fba7caa78b4f788ae2f203f10d1b66bfe9466741afbf008d46"
+    },
+    {
+      "path": "published-snapshot/pages/donate.zh.html",
+      "bytes": 3585,
+      "sha256": "b3331062c4e5d3f12bb9b9ba1d780cf87a2885d33727cfa611cb19b58d987bb3"
+    },
+    {
+      "path": "published-snapshot/pages/events.en.html",
+      "bytes": 4444,
+      "sha256": "b2706ef9f3a16acf23ae12036077059e1edcfe6e270224f92a1530c0b4ab0839"
+    },
+    {
+      "path": "published-snapshot/pages/events.zh.html",
+      "bytes": 4416,
+      "sha256": "cc3fb72c192b3a96d7f4e9222aaf9efd92f010904d5cd155ad2b222ff28a7071"
+    },
+    {
+      "path": "published-snapshot/pages/events__english-science-camp-july-2026.en.html",
+      "bytes": 3956,
+      "sha256": "caf77958f7332db8c90ff9eea58121a907408335e8b32b89a818465b874f7e76"
+    },
+    {
+      "path": "published-snapshot/pages/events__english-science-camp-july-2026.zh.html",
+      "bytes": 3903,
+      "sha256": "9a90be03b56d61acdad289ccb822ba04764d05135fba664c9111ec0ba14438fd"
+    },
+    {
+      "path": "published-snapshot/pages/home.en.html",
+      "bytes": 15219,
+      "sha256": "9d117fb14c3cea119240e40ed0e29b2e861583175f37eadd627a7413edb1ff73"
+    },
+    {
+      "path": "published-snapshot/pages/home.zh.html",
+      "bytes": 14826,
+      "sha256": "750f06b9608ba7ae8bab220efaefc9304a65bba70935aaecbef03941e307f2e9"
+    },
+    {
+      "path": "published-snapshot/pages/impact.en.html",
+      "bytes": 4897,
+      "sha256": "86f32072ec4b19b1074352ae2e17f821b9790a20214280e34654bb7f351307b4"
+    },
+    {
+      "path": "published-snapshot/pages/impact.zh.html",
+      "bytes": 4826,
+      "sha256": "caa2b556522d24d6c75d03e72d6552387dcaf1e9a26838f6f0c2c0bb9d485c4d"
+    },
+    {
+      "path": "published-snapshot/pages/mission.en.html",
+      "bytes": 3489,
+      "sha256": "25e5d827929fd84ed44225b94154a383fdb4c6d530a4bd057005fb52b9a43f44"
+    },
+    {
+      "path": "published-snapshot/pages/mission.zh.html",
+      "bytes": 3513,
+      "sha256": "ab22d7875abe80104fb09b1b35ba4bdab29ba69c168648bfbec06bb18825eaf3"
+    },
+    {
+      "path": "published-snapshot/pages/privacy.en.html",
+      "bytes": 6806,
+      "sha256": "8d683ba59553c49cb5f29621e02e23e844341f61a0696d40f74af4810b7753ee"
+    },
+    {
+      "path": "published-snapshot/pages/privacy.zh.html",
+      "bytes": 6257,
+      "sha256": "158b259e07921c1e2149ff97488ef3480bc5c6e887e354d025108f86333eb3f5"
+    },
+    {
+      "path": "published-snapshot/pages/science-camp.en.html",
+      "bytes": 5403,
+      "sha256": "a746c3067d4d475cf8309c02ca7a535c746f2d0bbd193981c85dcad81242300a"
+    },
+    {
+      "path": "published-snapshot/pages/science-camp.zh.html",
+      "bytes": 5234,
+      "sha256": "efc19e7fdb652726908b9442ef07ebe839c267ce8a011fe63cd34b6c351a00fd"
+    },
+    {
+      "path": "published-snapshot/pages/signup.en.html",
+      "bytes": 4100,
+      "sha256": "4f2fdc75e911b90b37a08e2f168e2be03c4e318397e215e45d05a6f95e27c918"
+    },
+    {
+      "path": "published-snapshot/pages/signup.zh.html",
+      "bytes": 3924,
+      "sha256": "0d6a116fb2f14541b392b8beeeed4e6d4c08088dc880a41a443cc82c506161c8"
+    },
+    {
+      "path": "published-snapshot/pages/team.en.html",
+      "bytes": 3813,
+      "sha256": "f451040acb3259483ed2670f51ffbfc2ed2ebf5ff42393f9a598a3ee4733ed5c"
+    },
+    {
+      "path": "published-snapshot/pages/team.zh.html",
+      "bytes": 3865,
+      "sha256": "9a3e398ce719ef27cd36b695b4604789a55eaba93268c1b0885fc6580f4cfca6"
+    },
+    {
+      "path": "published-snapshot/pages/testimonials.en.html",
+      "bytes": 3229,
+      "sha256": "c41af4e4167aba842fff092475e77614dfc62c23186b2bd859fe867500b61a14"
+    },
+    {
+      "path": "published-snapshot/pages/testimonials.zh.html",
+      "bytes": 3231,
+      "sha256": "8454fbed100b5a4246fd4c8672a1b73c916b4708580c9ab20c71580d9bde1386"
+    },
+    {
+      "path": "published-snapshot/pages/timeline.en.html",
+      "bytes": 4038,
+      "sha256": "0943fe96888fd96ab2dbec1c73cf91c60c64371f3c46a478e9b4d09eedeb13bf"
+    },
+    {
+      "path": "published-snapshot/pages/timeline.zh.html",
+      "bytes": 4013,
+      "sha256": "f07fe8136f2451998cf238feb93faa7f6c5cb2f326006865771d263204712a9b"
+    },
+    {
+      "path": "published-snapshot/pages/timeline__july-2026-science-camp.en.html",
+      "bytes": 3139,
+      "sha256": "988104cc23cd7239f2d5e35e994552af1c00c68637a2f269f1686dce2a6d509b"
+    },
+    {
+      "path": "published-snapshot/pages/timeline__july-2026-science-camp.zh.html",
+      "bytes": 3096,
+      "sha256": "4b718039adbed7d2f754a84beb6e62178934c08854ae667f48d5f017ec0c0227"
+    },
+    {
+      "path": "published-snapshot/sitemap.xml",
+      "bytes": 1442,
+      "sha256": "d77f1693ff8e08a35f7c72a875354592a5a5d11d85d935f846c4b9a9b0a75a70"
+    },
+    {
+      "path": "README.md",
+      "bytes": 13939,
+      "sha256": "43a2c83e1d2c209547427d50019f8fe42e50559b99250b0d33767c2da77abe3b"
+    },
+    {
+      "path": "scripts/build.mjs",
+      "bytes": 1701,
+      "sha256": "6648d4a36fa1c0ace8d527dc30a5fa288d8dcd67a2aec352c233b6a8797d19cc"
+    },
+    {
+      "path": "scripts/enhance-content.mjs",
+      "bytes": 4247,
+      "sha256": "b44b3d85ab4d0e5a9ba28697497e508aa7efcf1646e16a78eddae751a7441efb"
+    },
+    {
+      "path": "scripts/prepare-content.mjs",
+      "bytes": 9626,
+      "sha256": "d3979d6220747666feb46b3528ff5df1d13974fa559c18b34f0e1942d7bc172c"
+    },
+    {
+      "path": "scripts/preview-proxy.mjs",
+      "bytes": 828,
+      "sha256": "1df369f00a58ae963ac74791218e7e1b85f848c19f639b3db32d63604c85691b"
+    },
+    {
+      "path": "src/collections.mjs",
+      "bytes": 11975,
+      "sha256": "4e78d82c900053f58f3d4a3657ea5e0b547cddc82b7929f1279df0342b040d10"
+    },
+    {
+      "path": "src/content-schema.json",
+      "bytes": 17766,
+      "sha256": "a8ae45859f36a8e5621195fb3e8d4eab15ef3e8628c945ad5938a48a4889083d"
+    },
+    {
+      "path": "src/content.mjs",
+      "bytes": 5900,
+      "sha256": "a8acf1cd4c228add51c431c2e5634fcc88b6b4f6688dd2eb9138cb6f015947af"
+    },
+    {
+      "path": "src/default-content.json",
+      "bytes": 12467,
+      "sha256": "8d78447266433e1ad2133fee2c0eaa7109b68318d32837333ce79db28bfed1e5"
+    },
+    {
+      "path": "src/extended-content.mjs",
+      "bytes": 7858,
+      "sha256": "d15fe9a2e02f15c0bc62ebab2eb010b9f112d62af7f75ab2f596d40a92b0a4d6"
+    },
+    {
+      "path": "src/gallery-api.mjs",
+      "bytes": 2813,
+      "sha256": "2ca379f31b0a0768a279d48aad4fa6cc65183db19cff5b0617caa24bb3d99812"
+    },
+    {
+      "path": "src/localization.mjs",
+      "bytes": 3300,
+      "sha256": "7965c8e0df7a788fe16b7592ae7a7f3b580681497c81ce1bd3b0cde90770ce8c"
+    },
+    {
+      "path": "src/origins.mjs",
+      "bytes": 308,
+      "sha256": "92bb8045a54691a5bfa9f8ffe88d84a1134203a0387e7d44a946a34f503966a1"
+    },
+    {
+      "path": "src/search.mjs",
+      "bytes": 1787,
+      "sha256": "a2e15c9d833bee2287b78edbac85da64fbbd3d4f84b7c2190efb92942b9b1932"
+    },
+    {
+      "path": "src/signups.mjs",
+      "bytes": 4748,
+      "sha256": "559d890270a37cf6974c3f4e46e1a12a348966544a373e95335d287133374440"
+    },
+    {
+      "path": "src/worker.mjs",
+      "bytes": 19020,
+      "sha256": "38f955c97b98669440482f9242cc465702b780f912098625baeecdc681e2dea9"
+    },
+    {
+      "path": "tests/collections.test.mjs",
+      "bytes": 2279,
+      "sha256": "cf00004f0284ca45ce3e5848c6c26d75a99d46a821ee4a306275f545eca983e5"
+    },
+    {
+      "path": "tests/content.test.mjs",
+      "bytes": 2706,
+      "sha256": "4012610e4d2f71adeae75f8072f431b1e52443ac47b4e0d8c0857a36c8cfd0d5"
+    },
+    {
+      "path": "tests/extended.test.mjs",
+      "bytes": 1242,
+      "sha256": "ee743bf81e576ee5d5e1258e8f2d3cf8ce0ff22bf7ae785b31ad53eeaf8484ab"
+    },
+    {
+      "path": "tests/integration.mjs",
+      "bytes": 5210,
+      "sha256": "318c8e993eee315d85225dda9d7137630e9832ccbeb69d4dc551eaac586a3ef4"
+    },
+    {
+      "path": "tests/layout-update.test.mjs",
+      "bytes": 2398,
+      "sha256": "e1ced5efdffe14ff86d901b6179b0b3c1d2c51a015993fb0263199e1bb59032c"
+    },
+    {
+      "path": "tests/localization.test.mjs",
+      "bytes": 1699,
+      "sha256": "fe622b89d7b02a1882ae8d050a46fdd3f9236e7145f2c301c79d9301743edebf"
+    },
+    {
+      "path": "tests/search-access.test.mjs",
+      "bytes": 2019,
+      "sha256": "69678b40898c22cb3b7a946c3a4d88924302fdedf145ee778b46949b62fcd08b"
+    },
+    {
+      "path": "tests/signup-integration.mjs",
+      "bytes": 4078,
+      "sha256": "78cfec17c3f483043a6c870385d5c042b7350d5ae03e9ef33a3779449bc33c04"
+    },
+    {
+      "path": "tests/workshop-flow.test.mjs",
+      "bytes": 1486,
+      "sha256": "ffb93aa7c362abd2e79813181923d4cac96c4157f9d96b894031ab1743598026"
+    },
+    {
+      "path": "wrangler.json",
+      "bytes": 315,
+      "sha256": "3d0d3e7a0b9d9a35728c0416232296351406ba56a806b05af6f8fb9e88e372ff"
+    }
+  ]
+}

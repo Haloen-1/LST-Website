@@ -1,0 +1,8 @@
+.experience{grid-template-columns:minmax(0,32fr) minmax(0,68fr)}
+.field-notes,.faq-section{grid-template-columns:minmax(0,40fr) minmax(0,60fr)}
+.learning-point p,.faq-answer{font-size:16px}
+.breadcrumbs{position:static;display:flex;flex-wrap:wrap;padding:0;gap:0;background:transparent;border:0;justify-content:flex-start;align-items:center}
+.hero{max-height:760px}
+@media(max-width:1100px){.field-notes,.faq-section{grid-template-columns:minmax(0,36fr) minmax(0,64fr)}}
+@media(max-width:800px){.experience,.field-notes,.faq-section{grid-template-columns:1fr}.hero{max-height:none}.breadcrumbs{flex-direction:row}.breadcrumbs>a{font-size:13px;padding:0}.breadcrumbs span{margin:0 10px}.subpage-header .brand{display:block}.subpage-main .eyebrow{line-height:1.8}}
+@media(max-width:350px){.hero h1{font-size:40px}.subpage-header .nav-cta{font-size:11px;padding:9px}.subpage-header .brand{font-size:10px}.section h2{font-size:39px}}
