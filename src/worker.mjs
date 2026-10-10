@@ -1,3 +1,5 @@
+import {renderKits} from './kits.mjs';
+import {syncForm,withAvailability} from './form-sync.mjs';
 import {editorIdentity} from './access.mjs';
 import {renderHeader} from './header.mjs';
 import {storePhoto,knownPhotos,readPhoto,PHOTO_LIMIT} from './photos.mjs';
@@ -32,6 +34,7 @@ function renderPage(path,content,{preview=false,status=200,filter='all',event=nu
  if(preview)html=html.replace('<body>','<body><div class="draft-banner">Saved draft — only visible to you. <a href="/admin">Back to editor</a></div>').replace('</head>','<meta name="robots" content="noindex,nofollow"></head>');
  const rewriter=new HTMLRewriter()
  .on('[data-google-form]',{element(el){try{const u=new URL(content.links.googleForm);if(u.protocol!=='https:'||u.hostname!=='docs.google.com'||!/^\/forms\/d\/(?:e\/)?[A-Za-z0-9_-]+\/viewform$/.test(u.pathname))return;u.search='?embedded=true';el.setInnerContent('<iframe class="google-form-frame" src="'+escapeHtml(u.href)+'" title="Workshop enquiries form" loading="eager" referrerpolicy="strict-origin-when-cross-origin"></iframe>',{html:true});}catch{}}})
+ .on('[data-kits]',{element(el){el.setInnerContent(renderKits(content),{html:true});}})
  .on('[data-team]' ,{element(el){el.setInnerContent(renderTeam(content),{html:true});}})
  .on('[data-timeline]',{element(el){el.setInnerContent(renderTimeline(content,preview),{html:true});}})
  .on('[data-program-timeline]',{element(el){el.setInnerContent(renderTimeline(content,preview,true),{html:true});}})
@@ -49,6 +52,8 @@ function renderPage(path,content,{preview=false,status=200,filter='all',event=nu
  .on('[data-content]',{element(el){
    const key=el.getAttribute('data-content');if(!(key in content.text))return;
    let value=el.tagName==='title'?escapeHtml(plainText(content.text[key])):richText(content.text[key]);
+   // A restored label may contain a Markdown link. Keep its text inside the existing button link.
+   if(el.tagName==='a'||el.tagName==='button')value=value.replace(/<\/?a\b[^>]*>/g,'');
    el.setInnerContent(value,{html:true});
  }})
  .on('[data-meta]',{element(el){el.setAttribute('content',content.text[el.getAttribute('data-meta')]??'');}})
@@ -66,6 +71,7 @@ const application={async fetch(request,env){
  if(path.startsWith('/_templates/')||path==='/admin.html')return error('Page not found.',404);
  if(path.startsWith('/admin')&&!owner)return deniedPage();
  const render=async(path,content,options={})=>{
+ content=await withAvailability(env,content);
  const version=locale=>{const c=localizedContent(content,locale);return renderPage(path,c,{...options,lang:locale,event:options.event?c.events.find(e=>e.id===options.event.id):null,timelineItem:options.timelineItem?c.timeline.find(t=>t.id===options.timelineItem.id):null});};
  const enResponse=version('en'),zhResponse=version('zh');let [en,zh]=await Promise.all([enResponse.text(),zhResponse.text()]);
  // Enquiry copy stays English; the shared header still follows the selected language.
@@ -75,6 +81,7 @@ const application={async fetch(request,env){
  return new Response(html,{status:enResponse.status,headers:enResponse.headers});
  };
  try{
+  if(path==='/api/forms/sync')return syncForm(request,env,recordContent(await readRecord(env)));
   if(path==='/api/language'&&request.method==='GET'){const preview=url.searchParams.get('preview')==='draft';if(preview&&!owner)return error('Sign in to preview translations.',403);return json(interfaceDictionary(recordContent(await readRecord(env),preview).translations));}
   if(path==='/api/search'&&request.method==='GET')return json({results:searchSite(localizedContent(recordContent(await readRecord(env)),lang),url.searchParams.get('q'))});
   if(path==='/api/signup')return await submitSignup(request,env,recordContent(await readRecord(env)));
@@ -87,7 +94,7 @@ const application={async fetch(request,env){
    if(!owner)return error('Sign in through Cloudflare Access with an authorized editor account.',401);
    if(['/api/editor/signups','/api/editor/signups.csv'].includes(path)&&request.method==='GET')return await adminSignups(request,env);
    if(path==='/api/editor'&&request.method==='GET'){
-    const record=await readRecord(env);return json({content:recordContent(record,true),revision:record?.revision??0,publishedAt:record?.published_at??null,fields,defaults,previewUrl:'/?preview=draft'});
+    const record=await readRecord(env);return json({content:recordContent(record,true),revision:record?.revision??0,publishedAt:record?.published_at??null,fields,defaults,previewUrl:'/?preview=draft',formSyncConfigured:(env.FORM_SYNC_SECRET?.length??0)>=32,formAvailability:await withAvailability(env,recordContent(record,true))});
    }
    if(request.method!=='POST')return error('Method not allowed.',405);
    if(!allowedOrigin(request,env)||request.headers.get('x-lst-editor')!=='1')return error('This change must be made from your website editor.',403);
@@ -123,7 +130,7 @@ const application={async fetch(request,env){
   if(path==='/robots.txt')return new Response('User-agent: *\n'+(env.STAGING==='true'?'Disallow: /':'Allow: /\nDisallow: /admin\nDisallow: /api/\nSitemap: '+env.PUBLIC_ORIGIN+'/sitemap.xml'),{headers:{'Content-Type':'text/plain'}});
   if(path==='/sitemap.xml'){
    const content=recordContent(await readRecord(env)),origin=env.PUBLIC_ORIGIN;
-   const paths=['/','/signup','/mission','/impact','/testimonials','/donate','/events','/team','/timeline','/cookies','/science-camp.html','/privacy.html',...content.events.filter(e=>e.visible).map(e=>'/events/'+e.id),...content.timeline.filter(t=>t.visible).map(t=>'/timeline/'+t.id)];
+   const paths=['/','/kits','/signup','/mission','/impact','/testimonials','/donate','/events','/team','/timeline','/cookies','/science-camp.html','/privacy.html',...content.events.filter(e=>e.visible).map(e=>'/events/'+e.id),...content.timeline.filter(t=>t.visible).map(t=>'/timeline/'+t.id)];
    return new Response('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+paths.map(p=>'<url><loc>'+escapeHtml(origin+p)+'</loc></url>').join('')+'</urlset>',{headers:{...security,'Content-Type':'application/xml;charset=utf-8','Cache-Control':'no-cache'}});
   }
   if(['/workshops','/workshops/','/workshops.html'].includes(path)){url.pathname='/events';return Response.redirect(url.href,302);}
@@ -138,7 +145,7 @@ const application={async fetch(request,env){
   if(path.startsWith('/timeline/')){
    const preview=url.searchParams.get('preview')==='draft';if(preview&&!owner)return error('Sign in as the site owner to preview your draft.',403);const content=recordContent(await readRecord(env),preview),item=content.timeline.find(t=>t.id===path.slice(10)&&(t.visible||preview));return item?render('/timeline.html',content,{preview,timelineItem:item}):render('/404.html',content,{status:404});
   }
-  const routes={'/mission':'/mission.html','/mission.html':'/mission.html','/impact':'/impact.html','/impact.html':'/impact.html','/testimonials':'/testimonials.html','/testimonials.html':'/testimonials.html','/donate':'/donate.html','/donate.html':'/donate.html','/signup':'/signup.html','/signup.html':'/signup.html','/team':'/team.html','/team.html':'/team.html','/timeline':'/timeline.html','/timeline.html':'/timeline.html','/cookies':'/cookies.html','/cookies.html':'/cookies.html','/':'/index.html','/index.html':'/index.html','/workshops':'/workshops.html','/workshops/':'/workshops.html','/workshops.html':'/workshops.html','/science-camp.html':'/science-camp.html','/privacy.html':'/privacy.html','/404.html':'/404.html'};
+  const routes={'/kits':'/kits.html','/kits/':'/kits.html','/kits.html':'/kits.html','/mission':'/mission.html','/mission.html':'/mission.html','/impact':'/impact.html','/impact.html':'/impact.html','/testimonials':'/testimonials.html','/testimonials.html':'/testimonials.html','/donate':'/donate.html','/donate.html':'/donate.html','/signup':'/signup.html','/signup.html':'/signup.html','/team':'/team.html','/team.html':'/team.html','/timeline':'/timeline.html','/timeline.html':'/timeline.html','/cookies':'/cookies.html','/cookies.html':'/cookies.html','/':'/index.html','/index.html':'/index.html','/workshops':'/workshops.html','/workshops/':'/workshops.html','/workshops.html':'/workshops.html','/science-camp.html':'/science-camp.html','/privacy.html':'/privacy.html','/404.html':'/404.html'};
   if(routes[path]){
    const preview=url.searchParams.get('preview')==='draft';if(preview&&!owner)return error('Sign in as the site owner to preview your draft.',403);
    const content=recordContent(await readRecord(env),preview);return render(routes[path],content,{preview,status:path==='/404.html'?404:200});

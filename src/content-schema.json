@@ -934,5 +934,45 @@
     "kind": "text",
     "max": 100,
     "required": true
+  },
+  {
+    "key": "kitsTitle",
+    "label": "Kits page heading",
+    "group": "Kits",
+    "kind": "text",
+    "max": 1000,
+    "required": true
+  },
+  {
+    "key": "kitsIntro",
+    "label": "Kits introduction",
+    "group": "Kits",
+    "kind": "text",
+    "max": 1000,
+    "required": true
+  },
+  {
+    "key": "kitsEmpty",
+    "label": "Empty kits message",
+    "group": "Kits",
+    "kind": "text",
+    "max": 1000,
+    "required": true
+  },
+  {
+    "key": "kitOrderButton",
+    "label": "Order button label",
+    "group": "Kits",
+    "kind": "text",
+    "max": 1000,
+    "required": true
+  },
+  {
+    "key": "kitSoldOut",
+    "label": "Sold out label",
+    "group": "Kits",
+    "kind": "text",
+    "max": 1000,
+    "required": true
   }
 ]

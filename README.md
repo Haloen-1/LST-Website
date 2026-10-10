@@ -52,3 +52,11 @@ Every public page uses the same sticky header. English/中文 is directly in the
 **Photo captions** collects the main, gallery, founder and team photo captions/alt text in one admin section, with formatting previews. The same fields remain editable beside their photos in Photos, Gallery and Team. Empty captions are allowed; enlarged gallery photos remain caption-free.
 
 Add testimonials directly below the photos in **Gallery → Homepage testimonials**, or use the existing **Testimonials** section in the same console. Add the quote, attribution and optional context, then enable its publication checkbox. Use Save draft → Preview saved draft → Publish changes. All visible testimonials appear in the homepage carousel with left/right arrows, touch scrolling and keyboard arrows, without requiring another page. The separate testimonials URL remains available for existing links. Hidden testimonials stay private; no sample testimonials are published by default.
+
+## Kits, response limits and fixed navigation
+
+The header stays fixed across every public page. Defaults are About, Our Work, Get Involved, Resources and Contact Us; all groups and destinations remain editable in Header. Purchase Our Kits opens `/kits`. Company Support and Donations point to the existing support page and its enquiry section; they do not process payments.
+
+Admin → **Kits** adds photos, captions/alt text, prices, descriptions and Google Form order links, visibility and manual out-of-stock status. Empty catalogues do not invent products or prices. Kit copy is editable in 中文內容 too. Admin → **Photo captions** now searches current caption/alt text, including both occurrences of “Science workshop in Taipei.” The timeline interaction hint has been removed.
+
+Automatic **Out of stock / Registration closed** status uses a signed Google Apps Script count connection. The code is prepared, not activated. See [setup and limitations](integrations/google-forms/README.md). A form link alone does not grant access to response counts. D1 migration `0004_form_counts.sql` is required. No respondent names, emails or answers are sent by this integration. It counts one response as one unit/place, with Google Forms' simultaneous-submission limitations.

@@ -1,0 +1,12 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import vm from 'node:vm';import {webcrypto} from 'node:crypto';import {parseHTML} from 'linkedom';import {richText,plainText} from '../public/formatting.js';
+test('admin finds both Taipei captions and saves edited captions and kit drafts',async()=>{
+ const {window,document}=parseHTML(fs.readFileSync('public/admin.html','utf8'));const defaults=JSON.parse(fs.readFileSync('src/default-content.json'));let saved;
+ const fetch=async(path,options)=>({ok:true,json:async()=>{if(options?.body){saved=JSON.parse(options.body).content;return {revision:1};}return {content:structuredClone(defaults),defaults,revision:0,fields:JSON.parse(fs.readFileSync('src/content-schema.json')),formSyncConfigured:false};}});
+ const context={window,document,MutationObserver:window.MutationObserver,crypto:webcrypto,URL,URLSearchParams,location:{search:'?section=captions'},structuredClone,fetch,richText,plainText,console};vm.createContext(context);vm.runInContext(fs.readFileSync('public/admin.js','utf8').replace("import {richText,plainText} from '/formatting.js';",''),context);await new Promise(setImmediate);
+ assert.equal(document.querySelector('#section-title').textContent,'Photo captions');
+ const search=document.querySelector('[aria-label="Search photo captions"]');assert.ok(search);search.value='Science workshop in Taipei';search.dispatchEvent(new window.Event('input'));
+ const cards=[...document.querySelectorAll('#fields .collection-card')].filter(c=>!c.hidden);assert.equal(cards.length,2);assert.match(cards[0].textContent,/Opening photo/);
+ const caption=cards[0].querySelector('textarea');caption.value='My **editable** caption';caption.dispatchEvent(new window.Event('input'));document.querySelector('#save-draft').click();await new Promise(setImmediate);assert.equal(saved.photos.hero.caption,'My **editable** caption');
+ [...document.querySelectorAll('#editor-tabs button')].find(b=>b.textContent==='Kits').click();[...document.querySelectorAll('#fields button')].find(b=>b.textContent==='Add a kit').click();assert.ok(document.querySelector('#fields').textContent.includes('Need extra info'));document.querySelector('#save-draft').click();await new Promise(setImmediate);assert.equal(saved.kits.length,1);assert.equal(saved.kits[0].visible,false);assert.equal(saved.kits[0].responseLimit,null);
+});
+

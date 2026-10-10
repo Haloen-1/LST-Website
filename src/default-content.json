@@ -96,7 +96,12 @@
     "headerTagline": "TAIPEI · 台北小小科學家",
     "headerLogoAlt": "Little Scientists logo",
     "headerButton": "Find a workshop",
-    "lessonDetailsLabel": "Lesson details & signup"
+    "lessonDetailsLabel": "Lesson details & signup",
+    "kitsTitle": "Science kits",
+    "kitsIntro": "Explore science at home. Choose a kit and complete its order form.",
+    "kitsEmpty": "Our kits will be listed here when they are ready.",
+    "kitOrderButton": "Order via Google Form",
+    "kitSoldOut": "Out of stock"
   },
   "links": {
     "navPrograms": "/events",
@@ -216,7 +221,8 @@
       "ages": "Elementary school students",
       "status": "auto",
       "visible": true,
-      "signupMode": "closed"
+      "signupMode": "closed",
+      "responseLimit": null
     }
   ],
   "metrics": [
@@ -281,70 +287,86 @@
   "foundersPhotoHeight": 460,
   "navigation": [
     {
-      "label": "About us",
+      "label": "About",
       "url": "/mission",
       "children": [
         {
-          "label": "Our mission",
+          "label": "Our Mission",
           "url": "/mission"
         },
         {
-          "label": "Our team",
+          "label": "Our Team",
           "url": "/team"
-        },
-        {
-          "label": "Our impact",
-          "url": "/impact"
-        },
-        {
-          "label": "Testimonials",
-          "url": "/testimonials"
         }
       ]
     },
     {
-      "label": "Our Programs",
+      "label": "Our Work",
       "url": "/events",
       "children": [
         {
-          "label": "All programs",
+          "label": "Our Workshops",
           "url": "/events"
         },
         {
-          "label": "Upcoming",
+          "label": "Upcoming workshops",
           "url": "/events?filter=upcoming"
         },
         {
-          "label": "Past",
+          "label": "Past workshops",
           "url": "/events?filter=past"
         },
         {
-          "label": "Lesson timeline",
-          "url": "/timeline"
-        }
-      ]
-    },
-    {
-      "label": "Get involved",
-      "url": "/signup",
-      "children": [
-        {
-          "label": "Enquiries",
-          "url": "/signup"
-        },
-        {
-          "label": "Company support",
-          "url": "/donate"
-        },
-        {
-          "label": "FAQs",
-          "url": "/#questions"
+          "label": "Our Impact",
+          "url": "/impact"
         },
         {
           "label": "Gallery",
           "url": "/#gallery"
         }
       ]
+    },
+    {
+      "label": "Get Involved",
+      "url": "/signup",
+      "children": [
+        {
+          "label": "Company Support",
+          "url": "/donate"
+        },
+        {
+          "label": "Enquiries",
+          "url": "/signup"
+        },
+        {
+          "label": "Purchase Our Kits",
+          "url": "/kits"
+        },
+        {
+          "label": "Donations",
+          "url": "/donate#donations"
+        }
+      ]
+    },
+    {
+      "label": "Resources",
+      "url": "/testimonials",
+      "children": [
+        {
+          "label": "Testimonials",
+          "url": "/testimonials"
+        },
+        {
+          "label": "FAQs",
+          "url": "/#questions"
+        }
+      ]
+    },
+    {
+      "label": "Contact Us",
+      "url": "/signup",
+      "children": []
     }
-  ]
+  ],
+  "kits": []
 }

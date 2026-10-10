@@ -18,3 +18,5 @@ export const signups=sqliteTable('signups',{
 export const signupLimits=sqliteTable('signup_limits',{id:text('id').primaryKey(),attempts:integer('attempts').notNull(),createdAt:text('created_at').notNull()});
 
 export const uploadedPhotos=sqliteTable('uploaded_photos',{key:text('key').primaryKey(),bytes:integer('bytes').notNull(),etag:text('etag').notNull(),createdAt:text('created_at').notNull()});
+
+export const formCounts=sqliteTable('form_counts',{id:text('id').primaryKey(),formUrl:text('form_url').notNull(),responseCount:integer('response_count').notNull(),accepting:integer('accepting').notNull(),observedAt:integer('observed_at').notNull()});

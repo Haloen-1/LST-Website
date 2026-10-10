@@ -1,3 +1,4 @@
+import {validateKits,responseLimit,googleFormUrl} from './kits.mjs';
 import {richText,plainText} from '../public/formatting.js';
 import {validateExtended} from './extended-content.mjs';
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -26,10 +27,11 @@ export function validateCollections(input,validLink){
   const registrationUrl=str(e.registrationUrl??'','Registration link',2000);if(registrationUrl&&!validLink(registrationUrl))throw Error('Use a full https:// registration link or an internal /page path.');
   if(!['auto','upcoming','past'].includes(e.status))throw Error('Choose an event status.');
   if(!['builtin','external','closed'].includes(e.signupMode??'external'))throw Error('Choose a signup mode.');
-  return {signupMode:e.signupMode??'external',id:e.id,title:str(e.title,'Event title',160,true),description:str(e.description,'Event description',12000,visible),startDate,endDate,time:str(e.time??'','Event time',160),location:str(e.location??'','Venue name',250,visible),address:str(e.address??'','Address',500),mapEmbed:normalizeMap(str(e.mapEmbed??'','Google Maps embed',12000)),registrationUrl,registrationLabel:str(e.registrationLabel??'Register','Registration button label',80,true),price:str(e.price??'','Price',160),ages:str(e.ages??'','Ages',160),status:e.status,visible};
- });return {faqs,gallery,events,...validateExtended(input,validatePhoto)};
+  const limit=responseLimit(e.responseLimit);if(limit&&((e.signupMode??'external')!=='external'||!googleFormUrl(registrationUrl)))throw Error('Automatic limits need External registration and a full Google Form /viewform URL.');
+  return {responseLimit:limit,signupMode:e.signupMode??'external',id:e.id,title:str(e.title,'Event title',160,true),description:str(e.description,'Event description',12000,visible),startDate,endDate,time:str(e.time??'','Event time',160),location:str(e.location??'','Venue name',250,visible),address:str(e.address??'','Address',500),mapEmbed:normalizeMap(str(e.mapEmbed??'','Google Maps embed',12000)),registrationUrl,registrationLabel:str(e.registrationLabel??'Register','Registration button label',80,true),price:str(e.price??'','Price',160),ages:str(e.ages??'','Ages',160),status:e.status,visible};
+ });return {kits:validateKits(input.kits??[],validatePhoto),faqs,gallery,events,...validateExtended(input,validatePhoto)};
 }
-export function allPhotos(content){return [...Object.values(content.photos),...(content.links.headerLogo?[{src:content.links.headerLogo}]:[]),...(content.foundersPhoto?[content.foundersPhoto]:[]),...content.gallery,...content.team.filter(m=>m.visible&&m.photo).map(m=>m.photo)];}
+export function allPhotos(content){return [...Object.values(content.photos),...(content.kits||[]).filter(k=>k.visible&&k.photo).map(k=>k.photo),...(content.links.headerLogo?[{src:content.links.headerLogo}]:[]),...(content.foundersPhoto?[content.foundersPhoto]:[]),...content.gallery,...content.team.filter(m=>m.visible&&m.photo).map(m=>m.photo)];}
 export function eventStatus(event,now=new Date()){
  if(event.status!=='auto')return event.status;
  const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Taipei',year:'numeric',month:'2-digit',day:'2-digit'}).format(now);
@@ -43,7 +45,7 @@ export function renderEvents(content,filter='all',preview=false){
  return events.map(e=>`<article class="event-card"><div class="event-card-date"><span class="event-status">${eventStatus(e)==='past'?'Past event':'Upcoming'}</span><p>${esc(dateLabel(e))}</p>${e.time?`<p>${esc(e.time)}</p>`:''}</div><div><h2><a href="/events/${e.id}${preview?'?preview=draft':''}">${esc(e.title)}</a></h2><p class="event-card-description">${esc(plainText(e.description).slice(0,230))}${e.description.length>230?'…':''}</p><p class="event-venue">${esc(e.location)}</p><div class="event-card-actions"><a class="text-link" href="/events/${e.id}${preview?'?preview=draft':''}">View details &amp; location <span aria-hidden="true">↗</span></a></div></div><div class="event-registration">${registrationButton(e,preview)}</div></article>`).join('')||`<div class="events-empty"><h2>${filter==='past'?'Past adventures will appear here.':'More discoveries are on the way.'}</h2><p>${filter==='past'?'Visit again for stories from our workshops.':'There are no '+(filter==='all'?'published':'upcoming')+' events to show right now. Follow us on Instagram or contact the team for the next workshop.'}</p><a class="text-link" href="${esc(content.links.instagram)}" target="_blank" rel="noopener">Follow our discovery on Instagram ↗</a></div>`;
 }
 export function registrationButton(event,preview=false){
- if(eventStatus(event)==='past'||event.signupMode==='closed')return '<span class="registration-closed">Registration closed</span>';
+ if(event.formClosed||eventStatus(event)==='past'||event.signupMode==='closed')return '<span class="registration-closed">Registration closed</span>';
  const href=event.signupMode==='builtin'?'/events/'+event.id+(preview?'?preview=draft':''):event.registrationUrl;
  return href?`<a class="button dark event-register" href="${esc(href)}" ${href.startsWith('https:')?'target="_blank" rel="noopener"':''}>${esc(event.registrationLabel||'Register')} <span aria-hidden="true">↗</span></a>`:'<span class="registration-closed">Registration coming soon</span>';
 }

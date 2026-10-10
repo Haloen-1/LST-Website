@@ -1,9 +1,11 @@
 import {escapeText as esc} from '../public/formatting.js';
 
 export function defaultNavigation(content){return [
- {label:'About us',url:'/mission',children:[{label:'Our mission',url:content.links.missionPage},{label:'Our team',url:content.links.team},{label:'Our impact',url:content.links.impact},{label:'Testimonials',url:content.links.testimonials}]},
- {label:content.text.navProgramsLabel,url:content.links.navPrograms,children:[{label:'All programs',url:'/events'},{label:'Upcoming',url:'/events?filter=upcoming'},{label:'Past',url:'/events?filter=past'},{label:'Lesson timeline',url:'/timeline'}]},
- {label:'Get involved',url:'/signup',children:[{label:'Enquiries',url:'/signup'},{label:'Company support',url:content.links.donations},{label:content.text.navFaqLabel,url:'/#questions'},{label:'Gallery',url:'/#gallery'}]}
+ {label:'About',url:'/mission',children:[{label:'Our Mission',url:'/mission'},{label:'Our Team',url:'/team'}]},
+ {label:'Our Work',url:'/events',children:[{label:'Our Workshops',url:'/events'},{label:'Upcoming workshops',url:'/events?filter=upcoming'},{label:'Past workshops',url:'/events?filter=past'},{label:'Our Impact',url:'/impact'},{label:'Gallery',url:'/#gallery'}]},
+ {label:'Get Involved',url:'/signup',children:[{label:'Company Support',url:'/donate'},{label:'Enquiries',url:'/signup'},{label:'Purchase Our Kits',url:'/kits'},{label:'Donations',url:'/donate#donations'}]},
+ {label:'Resources',url:'/testimonials',children:[{label:'Testimonials',url:'/testimonials'},{label:'FAQs',url:'/#questions'}]},
+ {label:'Contact Us',url:'/signup',children:[]}
  ];}
 export function validateNavigation(items,validLink){
  if(!Array.isArray(items)||items.length>6)throw Error('Keep up to six header menu items.');

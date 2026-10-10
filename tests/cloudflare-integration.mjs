@@ -10,10 +10,11 @@ try{
  const preview=parseHTML(await(await request('/?preview=draft',{headers})).text()).document;
  assert.equal(preview.querySelector('[data-metrics] strong').textContent,'60+');
  assert.equal((await post('/api/editor/publish',{content,revision})).status,200);
- for(const route of ['/','/events','/impact','/mission','/team','/timeline','/testimonials','/donate','/signup','/privacy.html','/cookies','/science-camp.html','/events/'+content.events[0].id,'/timeline/'+content.timeline[0].id]){
+ for(const route of ['/','/kits','/events','/impact','/mission','/team','/timeline','/testimonials','/donate','/signup','/privacy.html','/cookies','/science-camp.html','/events/'+content.events[0].id,'/timeline/'+content.timeline[0].id]){
   const res=await request(route);assert.equal(res.status,200,route);const d=parseHTML(await res.text()).document;const pack=JSON.parse(d.querySelector('#lst-page-pack').textContent);assert.ok(pack.en.includes('lang="en"'));assert.ok(pack.zh.includes('lang="zh-Hant"'));assert.ok(d.querySelector('main'),route);
  }
  const home=parseHTML(await(await request('/')).text()).document;assert.equal(home.querySelector('.hero-actions [data-link="missionPage"]').getAttribute('href'),content.links.missionPage);assert.equal(home.querySelector('[data-new-tab]').getAttribute('target'),'_blank');assert.equal(home.querySelector('.dialog-caption'),null);assert.equal(home.querySelectorAll('[data-gallery] .gallery-item').length,3);
+ assert.ok(home.querySelector('.hero-actions .button').textContent.includes('View our programs'));
  assert.equal(home.querySelectorAll('[data-testimonial-carousel] .testimonial').length,3);
  assert.ok(!home.querySelector('[data-testimonial-carousel]').textContent.includes('Unapproved private feedback'));
  assert.equal(home.querySelector('[data-gallery] figcaption strong').textContent,'editable');
@@ -24,7 +25,7 @@ try{
  assert.equal(chineseSignup.querySelector('main').textContent,signup.querySelector('main').textContent);
  assert.equal(chineseSignup.querySelector('main').getAttribute('lang'),'en');
  assert.equal(signup.querySelector('header').innerHTML,home.querySelector('header').innerHTML);
- assert.equal(signup.querySelectorAll('.header-dropdown').length,3);
+ assert.equal(signup.querySelectorAll('.header-dropdown').length,4);
  assert.ok((await(await request('/api/search?q=Evelyn')).json()).results.length>0);
  assert.equal((await request('/api/language?preview=draft')).status,403);
  assert.equal((await request('/api/editor',{headers:{cookie:'CF_Authorization=forged','Cf-Access-Authenticated-User-Email':'owner@local.test'}})).status,401);

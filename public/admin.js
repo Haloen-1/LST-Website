@@ -1,3 +1,4 @@
+let formSyncConfigured=false,formAvailability={};
 const uploadPreviews=new Map();
 new MutationObserver(()=>{for(const img of document.querySelectorAll('img[src]')){const src=img.getAttribute('src');if(uploadPreviews.has(src))img.src=uploadPreviews.get(src);}}).observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});
 import {richText,plainText} from '/formatting.js';
@@ -40,6 +41,7 @@ function renderFields(){const area=$('#fields');area.replaceChildren();$('#secti
  for(const field of fields.filter(f=>f.group===activeGroup)){
   const store=field.kind==='link'?'links':'text';area.append(fieldControl({label:field.label,value:state[store][field.key],multiline:field.kind==='long'||field.kind==='heading',rows:field.kind==='long'?4:2,max:field.max,hint:null,onInput:value=>{state[store][field.key]=value;changed();}}));
  }
+ if(activeGroup==='Kits')renderKitEditor(area);
  if(activeGroup==='Header')renderHeaderEditor(area);
  if(activeGroup==='FAQs')renderFaqEditor(area);
  if(activeGroup==='Events')renderEventEditor(area);
@@ -76,7 +78,7 @@ function renderPhotos(area){
 }
 async function save(publish){if(busy||uploadCount)return;const savedGeneration=editGeneration;busy=true;updateActions();try{const result=await api('/api/editor/'+(publish?'publish':'save'),{method:'POST',headers:{'Content-Type':'application/json','X-LST-Editor':'1'},body:JSON.stringify({content:state,revision})});revision=result.revision;dirty=editGeneration!==savedGeneration;notice(dirty?'That version was saved. You have newer unsaved changes.':publish?'Your changes are live. Open “View website” to see them.':'Draft saved online. Open “Preview saved draft” to review it.');if(publish)$('#published-date').textContent='Published '+new Date(result.updatedAt).toLocaleString();}catch(e){notice(e.message,true);if(e.status===401){const a=document.createElement('a');a.href='/admin';a.target='_blank';a.textContent=' Sign in again in a new tab, then return here to save.';$('#notice').append(a);}}finally{busy=false;updateActions();}}
 $('#save-draft').addEventListener('click',()=>save(false));$('#publish').addEventListener('click',()=>save(true));$('#content-form').addEventListener('submit',e=>e.preventDefault());$('#preview-draft').addEventListener('click',e=>{if(dirty||busy||uploadCount){e.preventDefault();notice('Save your draft first, then preview the saved version.');}});window.addEventListener('beforeunload',e=>{if(dirty||uploadCount){e.preventDefault();e.returnValue='';}});
-async function start(){try{const result=await api('/api/editor');state=result.content;revision=result.revision;fields=result.fields;defaults=result.defaults;$('#loading-state').hidden=true;$('#content-form').hidden=false;$('#published-date').textContent=result.publishedAt?'Published '+new Date(result.publishedAt).toLocaleString():'Your current website stays live until you publish.';renderTabs();renderFields();updateActions();}catch(e){$('#loading-state').replaceChildren();const h=document.createElement('h1');h.textContent='We couldn’t load the editor.';const p=document.createElement('p');p.textContent=e.message;const link=document.createElement('a');link.href='/admin';link.textContent='Sign in with the site owner’s account';$('#loading-state').append(h,p,link);notice(e.message,true);}}
+async function start(){try{const result=await api('/api/editor');state=result.content;formSyncConfigured=result.formSyncConfigured;formAvailability=result.formAvailability||{};revision=result.revision;fields=result.fields;defaults=result.defaults;$('#loading-state').hidden=true;$('#content-form').hidden=false;$('#published-date').textContent=result.publishedAt?'Published '+new Date(result.publishedAt).toLocaleString():'Your current website stays live until you publish.';renderTabs();renderFields();updateActions();}catch(e){$('#loading-state').replaceChildren();const h=document.createElement('h1');h.textContent='We couldn’t load the editor.';const p=document.createElement('p');p.textContent=e.message;const link=document.createElement('a');link.href='/admin';link.textContent='Sign in with the site owner’s account';$('#loading-state').append(h,p,link);notice(e.message,true);}}
 start();
 
 function action(label,callback){const b=document.createElement('button');b.type='button';b.textContent=label;b.addEventListener('click',callback);return b;}
@@ -106,6 +108,7 @@ function renderEventEditor(area){
   const details=document.createElement('div');details.className='editor-two-columns';details.append(field('ages','Age group',{max:160}),field('price','Fee',{max:160}));card.append(details);
   card.append(selectField('Signup method',event.signupMode||'external',[['builtin','Built-in signup form'],['external','External registration link'],['closed','Registration closed']],value=>{event.signupMode=value;changed();}));
   card.append(field('registrationUrl','Registration form link',{max:2000,hint:'Paste this event’s published Google Form link (forms.gle or docs.google.com/forms). Each event can use a different form. Leave blank until registration is ready.'}),field('registrationLabel','Registration button label',{max:80}));
+  renderFormLimit(card,event,'event');
   const preview=document.createElement('a');preview.href='/events/'+event.id+'?preview=draft';preview.target='_blank';preview.rel='noopener';preview.textContent='Preview this event after saving ↗';preview.addEventListener('click',e=>{if(dirty||busy||uploadCount){e.preventDefault();notice('Save your draft before opening the event preview.');}});card.append(preview);collectionControls(state.events,index,card);area.append(card);
  }
  const add=action('Add an event',()=>{state.events.unshift({id:crypto.randomUUID(),title:'New workshop',description:'',startDate:'',endDate:'',time:'',location:'',address:'',mapEmbed:'',registrationUrl:'/signup',registrationLabel:'Enquire / 活動洽詢',price:'',ages:'',status:'auto',signupMode:'external',visible:false});changed();renderFields();area.querySelector('.collection-card input:not([type=checkbox])')?.focus();});add.disabled=state.events.length>=60;area.append(add);
@@ -194,7 +197,7 @@ async function renderLanguages(area){
  state.translations??={};const loading=document.createElement('p');loading.textContent='Loading translation fields…';area.append(loading);
  try{translationDefaults??=await fetch('/i18n-data.json').then(r=>r.json());}catch{loading.textContent='Translations could not be loaded. Please reopen this section.';return;}
  if(activeGroup!=='中文內容')return;loading.remove();
- const sources=new Map();const skip=new Set(['id','src','eventId','startDate','endDate','date','mapEmbed','registrationUrl','signupMode','status','email','url','links','contact','translations','interfaceText','nextWorkshop']);
+ const sources=new Map();const skip=new Set(['id','src','eventId','startDate','endDate','date','mapEmbed','registrationUrl','formUrl','signupMode','status','email','url','links','contact','translations','interfaceText','nextWorkshop']);
  function collect(value,path=''){if(typeof value==='string'&&value.trim()&&!/^https?:|^\/|^[\d+—.,%\s]+$/.test(value))sources.set(value.trim(),path);else if(Array.isArray(value))value.forEach((v,i)=>collect(v,path+' '+(i+1)));else if(value&&typeof value==='object')for(const [key,v]of Object.entries(value))if(!skip.has(key))collect(v,(path+' / '+key).trim());}
  collect(state);for(const source of Object.keys(translationDefaults))if(!sources.has(source))sources.set(source,'Website interface');
  const search=document.createElement('input');search.type='search';search.placeholder='搜尋英文或中文內容';search.setAttribute('aria-label','Search translations');search.className='translation-search';area.append(search);
@@ -231,8 +234,29 @@ function renderHeaderEditor(area){
 }
 
 function renderCaptionEditor(area){
- const entries=[...Object.entries(state.photos).map(([key,p])=>[key+' photo',p]),...state.gallery.map((p,i)=>['Gallery photo '+(i+1),p]),...(state.foundersPhoto?[['Co-founders together',state.foundersPhoto]]:[]),...state.team.filter(m=>m.photo).map(m=>[m.name+' portrait',m.photo])];
+ const note=document.createElement('p');note.textContent='The opening photo and gallery have separate captions. Search the current caption, such as Science workshop in Taipei, to find every copy.';area.append(note);
+ const search=document.createElement('input');search.type='search';search.placeholder='Search captions or photo descriptions';search.setAttribute('aria-label','Search photo captions');area.append(search);
+ const list=document.createElement('div');area.append(list);search.oninput=()=>{const q=search.value.toLowerCase();for(const card of list.children)card.hidden=!(card.textContent+' '+[...card.querySelectorAll('input,textarea')].map(e=>e.value).join(' ')).toLowerCase().includes(q);};
+ area=list;
+ const entries=[...Object.entries(state.photos).map(([key,p])=>[({hero:'Opening photo — homepage',discovery:'Lesson introduction photo',community:'Community photo'})[key]||key+' photo',p]),...(state.kits||[]).filter(k=>k.photo).map(k=>['Kit: '+k.title,k.photo]),...state.gallery.map((p,i)=>['Gallery photo '+(i+1),p]),...(state.foundersPhoto?[['Co-founders together',state.foundersPhoto]]:[]),...state.team.filter(m=>m.photo).map(m=>[m.name+' portrait',m.photo])];
  for(const [name,photo]of entries){const card=collectionCard(name),img=document.createElement('img');img.src=photo.src;img.alt=photo.alt;img.className='photo-preview';card.append(img);
  const caption=fieldControl({label:'Visible photo caption',value:photo.caption||'',max:1000,multiline:true,hint:'Shown below this image. Leave blank for no caption.',onInput:value=>{photo.caption=value;changed();}});caption.querySelector('.format-preview-label').textContent='Caption preview';
  card.append(caption,fieldControl({label:'Alt text',value:photo.alt,max:500,onInput:value=>{photo.alt=value;img.alt=value;changed();}}));area.append(card);}
+}
+help.Kits='Add science kits with photos, prices and published Google Forms. Save draft, preview /kits, then Publish changes. Prices are display text; orders are collected by Google Forms.';
+function renderFormLimit(card,item,type){
+ card.append(fieldControl({label:type==='kit'?'Stock / response limit (optional)':'Places / response limit (optional)',value:item.responseLimit??'',type:'number',format:false,hint:'One form response = one kit or place. Automatic status needs the Apps Script connection. Use the full docs.google.com/forms/.../viewform link, not a shortened forms.gle link.',onInput:value=>{item.responseLimit=value===''?null:Number(value);changed();}}));
+ const note=document.createElement('p');note.className='need-info';const saved=(formAvailability[type==='kit'?'kits':'events']||[]).find(x=>x.id===item.id);
+ note.textContent='Form sync ID: '+type+':'+item.id+'. '+(!formSyncConfigured?'Need extra info — form-count connection has not been activated.':!saved?.formSyncedAt?'Need extra info — connect this published form in Apps Script and run its first sync.':saved.formCount+' responses; last synced '+new Date(saved.formSyncedAt).toLocaleString()+'. Website availability updates after syncing.');card.append(note);
+}
+function renderKitEditor(area){
+ state.kits??=[];
+ for(const [index,kit]of state.kits.entries()){
+  const card=collectionCard(kit.title||'New science kit');
+  card.append(checkboxControl('Show this kit after publishing',kit.visible,value=>{kit.visible=value;changed();}),checkboxControl('Mark out of stock manually',kit.soldOut,value=>{kit.soldOut=value;changed();}));
+  for(const [key,label,max,multiline]of [['title','Kit name',160,false],['description','Description',6000,true],['price','Price including currency (for example NT$500)',100,false],['formUrl','Published Google Form order link',2000,false]])card.append(fieldControl({label,value:kit[key],max,multiline,onInput:value=>{kit[key]=value;changed();}}));
+  if(kit.photo){const img=document.createElement('img');img.className='photo-preview';img.src=kit.photo.src;img.alt=kit.photo.alt;const frame=()=>img.style.objectPosition=kit.photo.x+'% '+kit.photo.y+'%';frame();card.append(img);for(const [key,label,max]of [['alt','Photo alt text',500],['caption','Visible photo caption',1000]])card.append(fieldControl({label,value:kit.photo[key],max,multiline:key==='caption',onInput:value=>{kit.photo[key]=value;changed();}}));for(const [axis,label]of [['x','Horizontal focus'],['y','Vertical focus']])card.append(rangeControl(label,kit.photo[axis],0,100,value=>{kit.photo[axis]=value;frame();changed();}));}
+  card.append(photoUpload('Upload kit photo',src=>{kit.photo={src,alt:kit.title,caption:'',x:50,y:50};}));renderFormLimit(card,kit,'kit');collectionControls(state.kits,index,card);area.append(card);
+ }
+ const add=action('Add a kit',()=>{state.kits.push({id:crypto.randomUUID(),title:'',description:'',price:'',formUrl:'',photo:null,responseLimit:null,soldOut:false,visible:false});changed();renderFields();});add.disabled=state.kits.length>=50;area.append(add);
 }
