@@ -4,6 +4,8 @@ The repository contains the website and its deployment workflow. GitHub stores a
 
 **Connection enabled October 11, 2026:** the owner approved the dedicated GitHub deployment connection. The encrypted Actions secret and activation variables are configured for `codex/cloudflare-migration`. Pushes to that branch now run checks and then publish staging. Check the latest Actions run for deployment success. No production domain or DNS changes are included. Cloudflare Access activation was declined, so this configuration deliberately locks `/admin`, editor APIs and draft previews. The editor code remains in the repository for future verified authentication setup.
 
+The first staging deployment was published and its public pages and locked admin were verified on **October 11, 2026**. The initial immediate check encountered Cloudflare's temporary 404 while the new address activated; the workflow now allows up to 55 seconds for that first activation before checking the protected routes.
+
 The dedicated Cloudflare deployment token expires **April 11, 2027**. Before then, replace the GitHub secret with a renewed token through the service interfaces; never commit it to Git. Expiration stops future deployments, not the already deployed website.
 
 ## Connection setup reference (already completed for this repository)
