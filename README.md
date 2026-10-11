@@ -1,8 +1,8 @@
 # Little Scientists Taipei
 
-Cloudflare migration branch, based on GitHub main `152be6e`. Prepared locally; **not deployed**. The existing ChatGPT Sites website and DNS remain unchanged.
+Cloudflare migration branch, based on GitHub main `152be6e`. GitHub staging publication is configured; check [Actions](https://github.com/Haloen-1/LST-Website/actions) for the latest deployment result. The existing ChatGPT Sites website and DNS remain unchanged.
 
-Read [GitHub publishing setup](docs/GITHUB-PUBLISHING.md) for Commit → Push origin → Cloudflare staging. The workflow tests changes now; publication is disabled until the owner approves the deployment credential and activation variables. The admin stays locked while secure sign-in is unresolved. There is no production deployment configuration.
+Read [GitHub publishing setup](docs/GITHUB-PUBLISHING.md) for Commit → Push origin → Cloudflare staging. The owner-approved connection publishes passing pushes on `codex/cloudflare-migration`. The admin stays locked while secure sign-in is unresolved. There is no production deployment configuration.
 
 The [migration audit and staging runbook](docs/CLOUDFLARE-MIGRATION.md) covers restoring content and the separate Access-enabled configuration. No Access plan needs to be activated to publish the public staging site with the admin locked.
 

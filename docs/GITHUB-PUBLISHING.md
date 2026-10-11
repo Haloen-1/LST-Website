@@ -2,9 +2,11 @@
 
 The repository contains the website and its deployment workflow. GitHub stores and tests the code; Cloudflare Workers serves the website with D1 and KV. GitHub Pages cannot run this Worker or its database/editor endpoints.
 
-**Current state:** the workflow is prepared but deployment is disabled until the owner approves and completes the one-time connection below. No production domain or DNS changes are included. Cloudflare Access activation was declined, so this configuration deliberately locks `/admin`, editor APIs and draft previews. The editor code remains in the repository for future verified authentication setup.
+**Connection enabled October 11, 2026:** the owner approved the dedicated GitHub deployment connection. The encrypted Actions secret and activation variables are configured for `codex/cloudflare-migration`. Pushes to that branch now run checks and then publish staging. Check the latest Actions run for deployment success. No production domain or DNS changes are included. Cloudflare Access activation was declined, so this configuration deliberately locks `/admin`, editor APIs and draft previews. The editor code remains in the repository for future verified authentication setup.
 
-## One-time connection (requires owner approval)
+The dedicated Cloudflare deployment token expires **April 11, 2027**. Before then, replace the GitHub secret with a renewed token through the service interfaces; never commit it to Git. Expiration stops future deployments, not the already deployed website.
+
+## Connection setup reference (already completed for this repository)
 
 1. Keep the repository public. This workflow uses standard GitHub-hosted Ubuntu runners and refuses to run if the repository becomes private, avoiding billable private-repository runner usage. Do not enable larger runners or paid plans.
 2. Create a dedicated Cloudflare API token for this GitHub repository, scoped only to the existing Little Scientists account. Required account permissions are **Workers Scripts: Edit**, **Workers KV Storage: Edit**, **D1: Edit**, and **Account Settings: Read**. No DNS, zone-route or billing permissions are requested. These permissions are account-scoped; the committed configuration and checks restrict this workflow to the named staging resources. Do not use a Global API Key or copy the local Wrangler OAuth login.
