@@ -69,7 +69,7 @@ const application={async fetch(request,env){
  const url=new URL(request.url),path=url.pathname,lang=languageFor(request);
  const identity=await editorIdentity(request,env),owner=!!identity;
  if(path.startsWith('/_templates/')||path==='/admin.html')return error('Page not found.',404);
- if(path.startsWith('/admin')&&!owner)return deniedPage();
+ if(path.startsWith('/admin')&&!owner)return env.ADMIN_DISABLED==='true'?responseHtml('<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Editor unavailable</title><main><h1>The staging editor is locked.</h1><p>Secure administrator sign-in has not been activated. Signing in again will not unlock this preview.</p><a href="/">Back to the website</a></main></html>',403):deniedPage();
  const render=async(path,content,options={})=>{
  content=await withAvailability(env,content);
  const version=locale=>{const c=localizedContent(content,locale);return renderPage(path,c,{...options,lang:locale,event:options.event?c.events.find(e=>e.id===options.event.id):null,timelineItem:options.timelineItem?c.timeline.find(t=>t.id===options.timelineItem.id):null});};

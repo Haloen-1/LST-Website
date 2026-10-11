@@ -13,8 +13,12 @@ export function checkStaging(config){
  require(vars.STAGING==='true','Staging must remain noindex.');
  require(/^https:\/\/little-scientists-staging\.[a-z0-9-]+\.workers\.dev$/.test(vars.PUBLIC_ORIGIN||''),'Set the exact staging workers.dev origin.');
  require(!vars.PUBLIC_ORIGINS,'Do not allow additional public origins on staging.');
- require(/^https:\/\/[a-z0-9-]+\.cloudflareaccess\.com$/.test(vars.ACCESS_ISSUER||''),'Set the Cloudflare Access team issuer.');
- require(/^[a-f0-9]{64}$/i.test(vars.ACCESS_AUD||''),'Set the Access application audience tag.');
+ if(vars.ADMIN_DISABLED==='true'){
+  require(!vars.ACCESS_ISSUER&&!vars.ACCESS_AUD,'Locked staging must omit Access credentials.');
+ }else{
+  require(/^https:\/\/[a-z0-9-]+\.cloudflareaccess\.com$/.test(vars.ACCESS_ISSUER||''),'Set the Cloudflare Access team issuer.');
+  require(/^[a-f0-9]{64}$/i.test(vars.ACCESS_AUD||''),'Set the Access application audience tag.');
+ }
  require(typeof vars.EDITOR_EMAILS==='string'&&vars.EDITOR_EMAILS.split(',').every(s=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.trim())),'Set an explicit approved editor email list.');
  require(assets.directory==='./dist/assets'&&assets.binding==='ASSETS'&&assets.html_handling==='none'&&assets.not_found_handling==='none','Preserve Static Assets routing and disable HTML fallback.');
  require(assets.run_worker_first===true||['/admin*','/api/*','/media/*','/robots.txt','/sitemap.xml'].every(p=>assets.run_worker_first?.includes(p)),'Protected paths must reach the Worker before Static Assets.');

@@ -2,6 +2,7 @@ import {createRemoteJWKSet,jwtVerify} from 'jose';
 
 const keySets=new Map();
 export function accessConfig(env){
+ if(env.ADMIN_DISABLED==='true')return null;
  const issuer=String(env.ACCESS_ISSUER||'').replace(/\/$/,'');
  if(!/^https:\/\/[a-z0-9-]+\.cloudflareaccess\.com$/.test(issuer)||!env.ACCESS_AUD)return null;
  const allowed=[env.EDITOR_EMAIL,...String(env.EDITOR_EMAILS||'').split(',')].filter(Boolean).map(v=>v.trim().toLowerCase()).filter(Boolean);
