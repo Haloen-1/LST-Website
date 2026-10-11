@@ -1,1 +1,42 @@
-{"name":"little-scientists-taipei","main":"dist/server/index.js","compatibility_date":"2026-05-15","d1_databases":[{"binding":"DB","database_name":"little-scientists-content","database_id":"local-preview-db","migrations_dir":"drizzle"}],"r2_buckets":[{"binding":"BUCKET","bucket_name":"little-scientists-photos"}]}
+{
+  "name": "little-scientists-local",
+  "main": "dist/server/index.js",
+  "compatibility_date": "2026-05-15",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [],
+  "assets": {
+    "directory": "./dist/assets",
+    "binding": "ASSETS",
+    "html_handling": "none",
+    "not_found_handling": "none",
+    "run_worker_first": [
+      "/admin*",
+      "/api/*",
+      "/media/*",
+      "/robots.txt",
+      "/sitemap.xml"
+    ]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "little-scientists-local",
+      "database_id": "00000000-0000-0000-0000-000000000001",
+      "migrations_dir": "drizzle"
+    }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "PHOTOS",
+      "id": "00000000000000000000000000000001"
+    }
+  ],
+  "vars": {
+    "STAGING": "true",
+    "PUBLIC_ORIGIN": "http://127.0.0.1:8787",
+    "ACCESS_ISSUER": "",
+    "ACCESS_AUD": "",
+    "EDITOR_EMAILS": ""
+  }
+}

@@ -58,9 +58,9 @@
     "timelineTitle": "Workshop timeline",
     "timelineIntro": "Explore our workshops and lessons.",
     "impactTitle": "Our impact",
-    "formTitle": "Workshop enquiries & updates / 活動洽詢與最新消息",
-    "formIntro": "Leave your name and email below. A parent or guardian should complete the form for a child. This is an enquiry, not a confirmed booking.\n請留下姓名與電子郵件。兒童請由家長或監護人填寫。此表單供活動洽詢使用，不代表報名已確認。",
-    "formButton": "Open Google Form / 開啟 Google 表單",
+    "formTitle": "Workshop enquiries & updates",
+    "formIntro": "Leave your name and email below. A parent or guardian should complete the form for a child. This is an enquiry, not a confirmed booking.",
+    "formButton": "Open Google Form",
     "missionLabel": "ABOUT US",
     "missionTitle": "Our mission",
     "missionBody": "Help elementary school children explore scientific ideas, practise English, and enjoy figuring things out together.",
@@ -91,7 +91,17 @@
     "programEnquiry": "Enquiries",
     "programAsk": "Ask about the next workshop",
     "planningLabel": "THE NEXT MONTH · IN PLANNING",
-    "planningNote": "More lessons are being planned. Dates and details may change; check each listing before registering."
+    "planningNote": "More lessons are being planned. Dates and details may change; check each listing before registering.",
+    "headerBrand": "LITTLE SCIENTISTS",
+    "headerTagline": "TAIPEI · 台北小小科學家",
+    "headerLogoAlt": "Little Scientists logo",
+    "headerButton": "Find a workshop",
+    "lessonDetailsLabel": "Lesson details & signup",
+    "kitsTitle": "Science kits",
+    "kitsIntro": "Explore science at home. Choose a kit and complete its order form.",
+    "kitsEmpty": "Our kits will be listed here when they are ready.",
+    "kitOrderButton": "Order via Google Form",
+    "kitSoldOut": "Out of stock"
   },
   "links": {
     "navPrograms": "/events",
@@ -112,7 +122,8 @@
     "testimonials": "/testimonials",
     "donations": "/donate",
     "enquiries": "/signup",
-    "missionPage": "/mission"
+    "missionPage": "/mission",
+    "headerLogo": "/assets/logo.svg"
   },
   "photos": {
     "hero": {
@@ -210,7 +221,8 @@
       "ages": "Elementary school students",
       "status": "auto",
       "visible": true,
-      "signupMode": "closed"
+      "signupMode": "closed",
+      "responseLimit": null
     }
   ],
   "metrics": [
@@ -272,5 +284,89 @@
   },
   "testimonials": [],
   "foundersPhoto": null,
-  "foundersPhotoHeight": 460
+  "foundersPhotoHeight": 460,
+  "navigation": [
+    {
+      "label": "About",
+      "url": "/mission",
+      "children": [
+        {
+          "label": "Our Mission",
+          "url": "/mission"
+        },
+        {
+          "label": "Our Team",
+          "url": "/team"
+        }
+      ]
+    },
+    {
+      "label": "Our Work",
+      "url": "/events",
+      "children": [
+        {
+          "label": "Our Workshops",
+          "url": "/events"
+        },
+        {
+          "label": "Upcoming workshops",
+          "url": "/events?filter=upcoming"
+        },
+        {
+          "label": "Past workshops",
+          "url": "/events?filter=past"
+        },
+        {
+          "label": "Our Impact",
+          "url": "/impact"
+        },
+        {
+          "label": "Gallery",
+          "url": "/#gallery"
+        }
+      ]
+    },
+    {
+      "label": "Get Involved",
+      "url": "/signup",
+      "children": [
+        {
+          "label": "Company Support",
+          "url": "/donate"
+        },
+        {
+          "label": "Enquiries",
+          "url": "/signup"
+        },
+        {
+          "label": "Purchase Our Kits",
+          "url": "/kits"
+        },
+        {
+          "label": "Donations",
+          "url": "/donate#donations"
+        }
+      ]
+    },
+    {
+      "label": "Resources",
+      "url": "/testimonials",
+      "children": [
+        {
+          "label": "Testimonials",
+          "url": "/testimonials"
+        },
+        {
+          "label": "FAQs",
+          "url": "/#questions"
+        }
+      ]
+    },
+    {
+      "label": "Contact Us",
+      "url": "/signup",
+      "children": []
+    }
+  ],
+  "kits": []
 }

@@ -22,6 +22,20 @@
       "when": 1790250008187,
       "tag": "0002_mature_slyde",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1791606486927,
+      "tag": "0003_uploaded_photos",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1791613025338,
+      "tag": "0004_form_counts",
+      "breakpoints": true
     }
   ]
 }

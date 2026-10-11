@@ -1,7 +1,7 @@
 import {plainText} from '../public/formatting.js';
 export function searchSite(content,query){
  const q=String(query||'').trim().toLocaleLowerCase().slice(0,120);if(!q)return [];
- const entries=[
+ const entries=[{title:content.text.kitsTitle,url:"/kits",text:content.text.kitsIntro},...(content.kits||[]).filter(k=>k.visible).map(k=>({title:k.title,url:"/kits#kit-"+k.id,text:k.description+" "+k.price})),
  {title:content.text.missionTitle,url:'/mission',text:content.text.missionBody},
  {title:content.text.impactTitle,url:'/impact',text:content.text.impactIntro+' '+content.text.impactLocations+' '+content.text.futureBody},
  {title:content.text.testimonialsTitle,url:'/testimonials',text:content.text.testimonialsIntro+' '+(content.testimonials||[]).filter(t=>t.visible).map(t=>t.quote+' '+t.name).join(' ')},

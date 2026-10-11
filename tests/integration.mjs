@@ -1,9 +1,14 @@
+import {parseHTML} from 'linkedom';
 import assert from 'node:assert/strict';import fs from 'node:fs';import {defaults} from '../src/content.mjs';
-const base='http://127.0.0.1:8787';const headers={'oai-authenticated-user-id':'test-owner','oai-authenticated-user-email':'owner@local.test','Origin':'http://127.0.0.1:8765','X-LST-Editor':'1'};
-async function request(path,options={}){return fetch(base+path,options);}
-async function post(path,body,extra={}){return request(path,{method:'POST',headers:{...headers,'Content-Type':'application/json',...extra},body:JSON.stringify(body)});}
+import {harness} from './harness.mjs';
+const {mf,headers,request,post}=await harness();
+try{
+for(const route of ['/admin','/admin/','/admin.css','/admin.js'])assert.equal((await request(route)).status,403,route);
+for(const route of ['/admin.html','/_templates/admin.html'])assert.equal((await request(route)).status,404,route);
+assert.equal((await request('/assets/logo.svg')).status,200);assert.equal((await request('/styles.css')).status,200);
+assert.equal((await request('/')).headers.get('x-robots-tag'),'noindex, nofollow');
 assert.equal((await request('/api/editor')).status,401);
-assert.equal((await request('/api/editor',{headers:{...headers,'oai-authenticated-user-email':'other@example.com'}})).status,403);
+assert.equal((await request('/api/editor',{headers:{'oai-authenticated-user-id':'owner','oai-authenticated-user-email':'owner@local.test'}})).status,401);
 assert.equal((await request('/?preview=draft')).status,403);
 const initial=await (await request('/api/editor',{headers})).json();let revision=initial.revision;
 const before=await (await request('/')).text();const content=structuredClone(initial.content);const marker='Draft only <script>never-execute</script>';
@@ -15,7 +20,7 @@ assert.equal((await post('/api/editor/save',{content,revision},{Origin:'https://
 const saved=await post('/api/editor/save',{content,revision});assert.equal(saved.status,200);revision=(await saved.json()).revision;
 assert.equal(await (await request('/')).text(),before,'Draft leaked to public HTML');
 const draft=await (await request('/?preview=draft',{headers})).text();assert.ok(draft.includes('Draft only &lt;script&gt;never-execute&lt;/script&gt;'));assert.ok(draft.includes('/events?preview=draft'));
-const workshop=await (await request('/workshops?preview=draft',{headers})).text();assert.ok(workshop.includes('/events?preview=draft'));
+const workshop=await request('/workshops?preview=draft',{headers,redirect:'manual'});assert.equal(workshop.status,302);assert.equal(workshop.headers.get('location'),'https://staging.example/events?preview=draft');
 const draftEvent=await (await request('/events/'+content.events[0].id+'?preview=draft',{headers})).text();assert.ok(draftEvent.includes('https://forms.gle/example-registration'));assert.ok(draftEvent.includes('data-map-src="https://www.google.com/maps/embed?pb=local-test"'));assert.ok(!draftEvent.includes('onload="evil()"'));
 assert.equal((await post('/api/editor/save',{content,revision:revision-1})).status,409);
 const invalid=structuredClone(content);invalid.events[0].registrationUrl='javascript:alert(1)';assert.equal((await post('/api/editor/publish',{content:invalid,revision})).status,400);
@@ -26,7 +31,7 @@ content.photos.hero.src=uploaded.src;
 const published=await post('/api/editor/publish',{content,revision});assert.equal(published.status,200);revision=(await published.json()).revision;
 const after=await (await request('/')).text();assert.ok(after.includes('Draft only &lt;script&gt;never-execute&lt;/script&gt;'));assert.ok(after.includes(uploaded.src));assert.equal((await request(uploaded.src)).status,200);
 assert.ok((await (await request('/events?filter=upcoming')).text()).includes('https://forms.gle/example-registration'));
-assert.ok(!(await (await request('/events?filter=past')).text()).includes(content.events[0].title));
+assert.ok(!parseHTML(await (await request('/events?filter=past')).text()).document.querySelector('[data-event-list]').textContent.includes(content.events[0].title));
 assert.equal((await request('/events/hidden-event')).status,404);assert.equal((await request('/events/hidden-event?preview=draft',{headers})).status,200);
 assert.ok(after.includes('A new question?'));assert.ok(after.includes('Custom gallery caption'));assert.ok(!after.includes('A world to discover'));assert.ok(after.includes('https://www.instagram.com/littlescientiststaipei/'));
 assert.equal((await request('/api/gallery')).status,410);
@@ -36,3 +41,5 @@ assert.equal((await request('/admin.html')).status,404);
 const restored=await post('/api/editor/publish',{content:defaults,revision});assert.equal(restored.status,200);
 assert.equal((await request('/definitely-missing')).status,404);
 console.log('PASS: protected editor, drafts, atomic publishing, uploads, FAQ and captions, event filters and details, safe Maps embeds, hidden events, retired backend counting, CSRF, and custom 404.');
+
+}finally{await mf.dispose();}

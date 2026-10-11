@@ -1,0 +1,86 @@
+name: Check and publish Cloudflare staging
+
+on:
+  push:
+    branches: [main, codex/cloudflare-migration]
+  pull_request:
+    branches: [main, codex/cloudflare-migration]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lst-staging-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  check:
+    # Standard runners are free for public repositories. Stop if visibility changes.
+    if: github.repository == 'Haloen-1/LST-Website' && github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.19.0'
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+        with:
+          version: '11.25.0'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm test
+      - run: pnpm test:integration
+      - run: node scripts/check-staging.mjs wrangler.github.json
+      - run: node scripts/prepare-staging-publication.mjs
+      - run: pnpm exec wrangler deploy --config wrangler.github.json --dry-run
+        env:
+          WRANGLER_SEND_METRICS: 'false'
+
+  publish:
+    needs: check
+    # Both variables must be explicitly set after owner approval. PRs never deploy.
+    if: >-
+      github.event_name != 'pull_request' &&
+      vars.ENABLE_STAGING_DEPLOY == 'true' &&
+      github.ref_name == vars.STAGING_DEPLOY_BRANCH
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    concurrency:
+      group: lst-staging-publication
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.19.0'
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+        with:
+          version: '11.25.0'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: node scripts/check-staging.mjs wrangler.github.json
+      - run: node scripts/prepare-staging-publication.mjs
+      - name: Publish only to the separate staging Worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          WRANGLER_SEND_METRICS: 'false'
+        shell: bash
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo 'Missing CLOUDFLARE_API_TOKEN repository secret. Follow docs/GITHUB-PUBLISHING.md.'
+            exit 1
+          fi
+          pnpm exec wrangler d1 migrations apply DB --remote --config wrangler.github.json
+          pnpm exec wrangler d1 execute DB --remote --config wrangler.github.json --file .migration-output/staging-publication.sql
+          pnpm exec wrangler deploy --config wrangler.github.json
+      - run: node scripts/check-deployed-staging.mjs
+      - name: Publication summary
+        run: |
+          echo 'Staging: https://little-scientists-staging.littlescientiststaipei.workers.dev' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Admin remains locked. Existing live website and DNS are unchanged.' >> "$GITHUB_STEP_SUMMARY"
