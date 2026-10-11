@@ -6,7 +6,8 @@ test('admin finds both Taipei captions and saves edited captions and kit drafts'
  assert.equal(document.querySelector('#section-title').textContent,'Photo captions');
  const search=document.querySelector('[aria-label="Search photo captions"]');assert.ok(search);search.value='Science workshop in Taipei';search.dispatchEvent(new window.Event('input'));
  const cards=[...document.querySelectorAll('#fields .collection-card')].filter(c=>!c.hidden);assert.equal(cards.length,2);assert.match(cards[0].textContent,/Opening photo/);
- const caption=cards[0].querySelector('textarea');caption.value='My **editable** caption';caption.dispatchEvent(new window.Event('input'));document.querySelector('#save-draft').click();await new Promise(setImmediate);assert.equal(saved.photos.hero.caption,'My **editable** caption');
+ const locationField=cards[0].querySelector('input');locationField.value='TAIPEI · SCIENCE TOGETHER';locationField.dispatchEvent(new window.Event('input'));
+ const caption=cards[0].querySelector('textarea');caption.value='My **editable** caption';caption.dispatchEvent(new window.Event('input'));document.querySelector('#save-draft').click();await new Promise(setImmediate);assert.equal(saved.photos.hero.caption,'My **editable** caption');assert.equal(saved.text.heroLocation,'TAIPEI · SCIENCE TOGETHER');
  [...document.querySelectorAll('#editor-tabs button')].find(b=>b.textContent==='Kits').click();[...document.querySelectorAll('#fields button')].find(b=>b.textContent==='Add a kit').click();assert.ok(document.querySelector('#fields').textContent.includes('Need extra info'));document.querySelector('#save-draft').click();await new Promise(setImmediate);assert.equal(saved.kits.length,1);assert.equal(saved.kits[0].visible,false);assert.equal(saved.kits[0].responseLimit,null);
 });
 

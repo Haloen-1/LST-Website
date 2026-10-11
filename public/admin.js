@@ -240,6 +240,7 @@ function renderCaptionEditor(area){
  area=list;
  const entries=[...Object.entries(state.photos).map(([key,p])=>[({hero:'Opening photo — homepage',discovery:'Lesson introduction photo',community:'Community photo'})[key]||key+' photo',p]),...(state.kits||[]).filter(k=>k.photo).map(k=>['Kit: '+k.title,k.photo]),...state.gallery.map((p,i)=>['Gallery photo '+(i+1),p]),...(state.foundersPhoto?[['Co-founders together',state.foundersPhoto]]:[]),...state.team.filter(m=>m.photo).map(m=>[m.name+' portrait',m.photo])];
  for(const [name,photo]of entries){const card=collectionCard(name),img=document.createElement('img');img.src=photo.src;img.alt=photo.alt;img.className='photo-preview';card.append(img);
+ if(photo===state.photos.hero)card.append(fieldControl({label:'Opening photo location label (right side)',value:state.text.heroLocation,max:120,hint:'The TAIPEI, TAIWAN text beside the opening photo caption.',onInput:value=>{state.text.heroLocation=value;changed();}}));
  const caption=fieldControl({label:'Visible photo caption',value:photo.caption||'',max:1000,multiline:true,hint:'Shown below this image. Leave blank for no caption.',onInput:value=>{photo.caption=value;changed();}});caption.querySelector('.format-preview-label').textContent='Caption preview';
  card.append(caption,fieldControl({label:'Alt text',value:photo.alt,max:500,onInput:value=>{photo.alt=value;img.alt=value;changed();}}));area.append(card);}
 }
