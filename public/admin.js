@@ -39,6 +39,7 @@ function renderFields(){const area=$('#fields');area.replaceChildren();$('#secti
  if(activeGroup==='Signups'){renderSignups(area);return;}
  if(activeGroup==='Links & Contact')area.append(fieldControl({label:'Contact email address',value:state.contact.email,type:'email',max:254,hint:'Contact buttons open a Gmail compose window addressed to this email.',onInput:value=>{state.contact.email=value;changed();}}));
  for(const field of fields.filter(f=>f.group===activeGroup)){
+  if(field.key==='heroLocation'){area.append(openingPhotoLabels());continue;}
   const store=field.kind==='link'?'links':'text';area.append(fieldControl({label:field.label,value:state[store][field.key],multiline:field.kind==='long'||field.kind==='heading',rows:field.kind==='long'?4:2,max:field.max,hint:null,onInput:value=>{state[store][field.key]=value;changed();}}));
  }
  if(activeGroup==='Kits')renderKitEditor(area);
@@ -62,6 +63,13 @@ async function preparePhoto(file){
   return await new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(Error('The photo could not be prepared.')),'image/jpeg',.88));
  }finally{URL.revokeObjectURL(objectUrl);}
 }
+function openingPhotoLabels(){
+ const card=document.createElement('section');card.className='opening-photo-labels';
+ const title=document.createElement('h2');title.textContent='Opening photo — bottom captions';card.append(title);
+ card.append(fieldControl({label:'Bottom left caption',value:state.photos.hero.caption||'',max:1000,multiline:true,hint:'The text on the first large photo, such as Science workshop in Taipei. This is separate from the gallery caption.',onInput:value=>{state.photos.hero.caption=value;changed();}}));
+ card.append(fieldControl({label:'Bottom right location — TAIPEI, TAIWAN',value:state.text.heroLocation,max:600,onInput:value=>{state.text.heroLocation=value;changed();}}));
+ return card;
+}
 function renderPhotos(area){
  const descriptions={hero:['Opening photo','A wide landscape photo works best. Keep the important faces near the middle.'],discovery:['Discovery photo','A portrait or vertical photo works well here and on the workshop page.'],community:['Team & community photo','Use a landscape photo of your team or a workshop.']};
  for(const [slot,[title,description]]of Object.entries(descriptions)){
@@ -72,7 +80,8 @@ function renderPhotos(area){
   const status=document.createElement('p');status.className='upload-state';status.setAttribute('role','status');card.append(status);
   upload.addEventListener('change',async()=>{const file=upload.files?.[0];if(!file)return;uploadCount++;upload.disabled=true;restore.disabled=true;updateActions();status.textContent='Preparing your photo…';try{const blob=await preparePhoto(file);status.textContent='Uploading…';const result=await api('/api/editor/upload',{method:'POST',headers:{'Content-Type':'image/jpeg','X-LST-Editor':'1'},body:blob});state.photos[slot].src=result.src;img.src=result.src;changed();status.textContent='Uploaded. Save a draft or publish to use this photo. New photos may take about a minute to appear everywhere.';}catch(e){status.textContent=e.message;notice(e.message,true);}finally{uploadCount--;upload.disabled=false;restore.disabled=false;upload.value='';updateActions();}});
   card.append(fieldControl({label:'Photo description (for accessibility)',value:state.photos[slot].alt,max:500,onInput:value=>{state.photos[slot].alt=value;img.alt=value;changed();}}));
-  card.append(fieldControl({label:'Visible photo caption',value:state.photos[slot].caption||'',max:1000,multiline:true,onInput:value=>{state.photos[slot].caption=value;changed();}}));
+  if(slot==='hero')card.append(openingPhotoLabels());
+  else card.append(fieldControl({label:'Visible photo caption',value:state.photos[slot].caption||'',max:1000,multiline:true,onInput:value=>{state.photos[slot].caption=value;changed();}}));
   const sliders=document.createElement('div');sliders.className='photo-sliders';for(const [axis,name]of [['x','Horizontal focus'],['y','Vertical focus']]){const label=document.createElement('label');label.className='field';const title=document.createElement('span');title.textContent=name;const slider=document.createElement('input');slider.type='range';slider.min='0';slider.max='100';slider.value=state.photos[slot][axis];slider.addEventListener('input',()=>{state.photos[slot][axis]=Number(slider.value);img.style.objectPosition=`${state.photos[slot].x}% ${state.photos[slot].y}%`;changed();});label.append(title,slider);sliders.append(label);}card.append(sliders);area.append(card);
  }
 }
@@ -240,7 +249,7 @@ function renderCaptionEditor(area){
  area=list;
  const entries=[...Object.entries(state.photos).map(([key,p])=>[({hero:'Opening photo — homepage',discovery:'Lesson introduction photo',community:'Community photo'})[key]||key+' photo',p]),...(state.kits||[]).filter(k=>k.photo).map(k=>['Kit: '+k.title,k.photo]),...state.gallery.map((p,i)=>['Gallery photo '+(i+1),p]),...(state.foundersPhoto?[['Co-founders together',state.foundersPhoto]]:[]),...state.team.filter(m=>m.photo).map(m=>[m.name+' portrait',m.photo])];
  for(const [name,photo]of entries){const card=collectionCard(name),img=document.createElement('img');img.src=photo.src;img.alt=photo.alt;img.className='photo-preview';card.append(img);
- if(photo===state.photos.hero)card.append(fieldControl({label:'Opening photo location label (right side)',value:state.text.heroLocation,max:120,hint:'The TAIPEI, TAIWAN text beside the opening photo caption.',onInput:value=>{state.text.heroLocation=value;changed();}}));
+ if(photo===state.photos.hero){card.append(openingPhotoLabels(),fieldControl({label:'Alt text',value:photo.alt,max:500,onInput:value=>{photo.alt=value;img.alt=value;changed();}}));area.append(card);continue;}
  const caption=fieldControl({label:'Visible photo caption',value:photo.caption||'',max:1000,multiline:true,hint:'Shown below this image. Leave blank for no caption.',onInput:value=>{photo.caption=value;changed();}});caption.querySelector('.format-preview-label').textContent='Caption preview';
  card.append(caption,fieldControl({label:'Alt text',value:photo.alt,max:500,onInput:value=>{photo.alt=value;img.alt=value;changed();}}));area.append(card);}
 }

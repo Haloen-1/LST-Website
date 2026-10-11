@@ -9,5 +9,12 @@ test('admin finds both Taipei captions and saves edited captions and kit drafts'
  const locationField=cards[0].querySelector('input');locationField.value='TAIPEI · SCIENCE TOGETHER';locationField.dispatchEvent(new window.Event('input'));
  const caption=cards[0].querySelector('textarea');caption.value='My **editable** caption';caption.dispatchEvent(new window.Event('input'));document.querySelector('#save-draft').click();await new Promise(setImmediate);assert.equal(saved.photos.hero.caption,'My **editable** caption');assert.equal(saved.text.heroLocation,'TAIPEI · SCIENCE TOGETHER');
  [...document.querySelectorAll('#editor-tabs button')].find(b=>b.textContent==='Kits').click();[...document.querySelectorAll('#fields button')].find(b=>b.textContent==='Add a kit').click();assert.ok(document.querySelector('#fields').textContent.includes('Need extra info'));document.querySelector('#save-draft').click();await new Promise(setImmediate);assert.equal(saved.kits.length,1);assert.equal(saved.kits[0].visible,false);assert.equal(saved.kits[0].responseLimit,null);
+ [...document.querySelectorAll('#editor-tabs button')].find(b=>b.textContent==='Homepage').click();
+ const pair=document.querySelector('.opening-photo-labels');assert.ok(pair);
+ assert.match(pair.textContent,/Bottom left caption/);assert.match(pair.textContent,/Bottom right location/);
+ const homepageCaption=pair.querySelector('textarea');assert.equal(homepageCaption.value,'My **editable** caption');
+ homepageCaption.value='Homepage caption saved beside location';homepageCaption.dispatchEvent(new window.Event('input'));
+ document.querySelector('#save-draft').click();await new Promise(setImmediate);
+ assert.equal(saved.photos.hero.caption,'Homepage caption saved beside location');assert.equal(saved.text.heroLocation,'TAIPEI · SCIENCE TOGETHER');
 });
 
